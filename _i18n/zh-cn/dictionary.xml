@@ -4259,4 +4259,260 @@
   <block id="4f9bffbf1ddd667b6d18ee5fe3bc3389" category="paragraph"><block ref="3428bfd6b9aff85ad104616c57d9e301" prefix="" category="inline-code"></block><block ref="21c6b99e1b958da23b23c0373944c626" prefix=" " category="inline-code"></block> (使用专用版本)</block>
   <block id="d7cbf82bbbafb530fdf4ff891b9d305d" category="list-text">将此加载项更新到上一步输出中的update下返回的版本。<block ref="7517f28d87e3e3f5f51c7054bcfb6847" prefix=" " category="inline-code"></block></block>
   <block id="844c1d7ef01df888c2eaad6c7c2913c1" category="paragraph"><block ref="1e4bc555b90c0333c8626cc7405bd1f8" prefix="" category="inline-code"></block></block>
+  <block id="67fc69d0bf35fe0124a1937122bf3aec" category="summary">您可以配置加密以保护Astra Control与存储后端之间的流量。</block>
+  <block id="4d7f45f93965eed03fcd71fbeed6d2a8" category="doc">配置传输中的Kerberos加密</block>
+  <block id="876580b79932af82226561f24b11688f" category="paragraph">通过使用Astra Control配置程序、您可以对受管集群和存储后端之间的流量启用加密、从而提高数据访问安全性。</block>
+  <block id="05deabe68807f95ec441eca5245eaab0" category="paragraph">Asta Control配置程序支持通过从Red Hat OpenShift和上游Kubbernetes集群到内部ONTAP卷的NFS3和NFSv4连接进行Kerberos加密。</block>
+  <block id="0a710c309a5f6dc65b056833a5208521" category="paragraph">您可以创建、删除、调整大小、创建快照、克隆、 只读克隆、并导入使用NFS加密的卷。</block>
+  <block id="0b660ae85d215a9e70834a4e745fe95b" category="section-title">为内部ONTAP卷配置传输中的Kerberos加密</block>
+  <block id="7c139dfc85d7e4497d2109fff4d0893f" category="paragraph">您可以对受管集群与内部ONTAP存储后端之间的存储流量启用Kerberos加密。</block>
+  <block id="4733fee3df7d4e6e25e68e5ad7d2adf0" category="admonition">仅支持使用存储驱动程序对内部ONTAP存储后端的NFS流量进行Kerberos加密<block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block> 。</block>
+  <block id="6e2b60d9ef0eed2895dd36450104f761" category="inline-link-macro">已启用Asta Control配置程序</block>
+  <block id="8758464d392ac54bf4ac49ade2ca62e2" category="list-text">确保已 <block ref="1c2b748ae79d0dfb94bb1d936ef06f9a" category="inline-link-macro-rx"></block> 在受管集群上安装。</block>
+  <block id="0ff02d27ae5cac1a12c6c403fd55443c" category="list-text">确保您可以访问该<block ref="c67fd1b99934afa248dfeb285a9a4191" prefix=" " category="inline-code"></block> 实用程序。</block>
+  <block id="bef890ed7cc869346d4b483cd3e3ab00" category="list-text">确保您对ONTAP存储后端具有管理员访问权限。</block>
+  <block id="160b05c1b85ce34d702a3568614baec1" category="list-text">确保您知道要从ONTAP存储后端共享的一个或多个卷的名称。</block>
+  <block id="1a69d38f7b46901c58e85d024e87b034" category="inline-link">在数据 LIF 上启用 Kerberos</block>
+  <block id="d4a594e9e05807f063e76ba8e5520ce8" category="list-text">确保已准备好ONTAP Storage VM以支持NFS卷的Kerberos加密。有关说明、请参见<block ref="6585cfb6b510f588abb97add305c4508" category="inline-link-rx"></block> 。</block>
+  <block id="9fe985de654739fa6f48edb0d49059b4" category="inline-link">《NetApp NFSv4增强功能和最佳实践指南》</block>
+  <block id="9c6a0d551d50340cca48e6cfa4355566" category="list-text">确保已正确配置使用Kerberos加密的任何NFSv4卷。请参阅的“NetApp NFSv4域配置”一节(第13页)<block ref="fcbfe3012009d21ef9ba8407142f85b6" category="inline-link-rx"></block>。</block>
+  <block id="7c67bfc9153da2055f6d09209f9853c7" category="section-title">添加或修改ONTAP导出策略</block>
+  <block id="3afa4a2a4546fcf1b9a361d1bff9763b" category="paragraph">您需要向现有ONTAP导出策略添加规则、或者创建新的导出策略、以便对ONTAP Storage VM根卷以及与上游Kubornetes集群共享的任何ONTAP卷支持Kerberos加密。您添加的导出策略规则或创建的新导出策略需要支持以下访问协议和访问权限：</block>
+  <block id="e21233a7f0d7fedb5883aea1dfed27cf" category="paragraph-title">访问协议</block>
+  <block id="e10f51f4d0eb1b58929237c03db4b832" category="paragraph">使用NFS、NFSv3和NFSv4访问协议配置导出策略。</block>
+  <block id="baedff73fdfff23f65e8b80727cd3088" category="paragraph-title">访问详细信息</block>
+  <block id="892969be437eb53b05f372cc0ae74d6c" category="paragraph">您可以根据卷的需求配置以下三种不同版本的Kerberos加密之一：</block>
+  <block id="fda32d078836aa6e69a3497be5f9cdca" category="list-text">*Kerberos 5*-(身份验证和加密)</block>
+  <block id="7d55fc39e32469f330297f866ec40e41" category="list-text">*Kerberos 5i*-(身份验证和加密与身份保护)</block>
+  <block id="ec7a355c2dad88f01ddce6c662ff507f" category="list-text">*Kerberos 5p*-(身份验证和加密、具有身份和隐私保护功能)</block>
+  <block id="43c969c43b32e3dd3bcf607fcbe4eb43" category="paragraph">使用适当的访问权限配置ONTAP导出策略规则。例如、如果集群要挂载混合使用Kerberos 5i和Kerberos 5p加密的NFS卷、请使用以下访问设置：</block>
+  <block id="0370275db54735bcb50d5bfce36de4e6" category="cell">只读访问</block>
+  <block id="dbdb2754b99a3cb725e62ef04c72ee06" category="cell">读/写访问</block>
+  <block id="a3a9521b6675631e988004e7b8ffe7b4" category="cell">超级用户访问</block>
+  <block id="15395d0642f86c5992abbca5e56e2b29" category="cell">UNIX</block>
+  <block id="00d23a76e43b46dae9ec7aa9dcbebb32" category="cell">已启用</block>
+  <block id="f22873ba6efee4accc10bd5a3d3ca9eb" category="cell">Kerberos 5i</block>
+  <block id="a98fd9001be872cb9763c171625ee881" category="cell">Kerberos 5p</block>
+  <block id="9a83b6e7170a551799b737b273fde5e1" category="paragraph">有关如何创建ONTAP导出策略和导出策略规则、请参见以下文档：</block>
+  <block id="bb53c6c29f127a298da7dd86bf00bb89" category="inline-link">创建导出策略</block>
+  <block id="2065c7b470f4d228b592158785fc8c0b" category="list-text"><block ref="2065c7b470f4d228b592158785fc8c0b" category="inline-link-rx"></block></block>
+  <block id="8c47b652d31bca921bb367b0e3c5ec6d" category="inline-link">向导出策略添加规则</block>
+  <block id="249db3ace916cc1363d388978a8b6c5e" category="list-text"><block ref="249db3ace916cc1363d388978a8b6c5e" category="inline-link-rx"></block></block>
+  <block id="c21c2b66c343dfe9db6298e59c2cc767" category="section-title">创建存储后端</block>
+  <block id="d4d4d663b462e9ebf9fa142e6c6a52d3" category="paragraph">您可以创建包含Kerberos加密功能的A作用 力控制配置程序存储后端配置。</block>
+  <block id="0848c0a5d21711a3f8967a344553c492" category="paragraph">在创建用于配置Kerberos加密的存储后端配置文件时、您可以使用参数指定以下三种不同版本的Kerberos加密之一<block ref="21f59c061af833af5de20556ce76052d" prefix=" " category="inline-code"></block> ：</block>
+  <block id="619885da64e4ba4b0df04a00d78079b7" category="list-text"><block ref="47587c842cb0a2574a5a4c7c644b006d" prefix="" category="inline-code"></block> (身份验证和加密)</block>
+  <block id="aa734ef649b1255faccfc198980bf49a" category="list-text"><block ref="600550ee922e257041b75142ddab2319" prefix="" category="inline-code"></block> (身份验证和加密以及身份保护)</block>
+  <block id="4197df0e0ac8f9480069ee1e0dc22543" category="list-text"><block ref="b148e7f5a01830ae530070588af5e9e6" prefix="" category="inline-code"></block> (身份验证和加密以及身份和隐私保护)</block>
+  <block id="c99e9f5ade1b20705438ad6882d112c2" category="paragraph">请仅指定一个Kerberos级别。如果在参数列表中指定多个Kerberos加密级别、则仅会使用第一个选项。</block>
+  <block id="926a7d5402fb3ed0da8fcd630e3a8f8c" category="list-text">在受管集群上、使用以下示例创建存储后端配置文件。将括号&lt;&gt;中的值替换为您环境中的信息：</block>
+  <block id="2cd636101227e18554e5c5351bf5bbe3" category="list-text">使用您在上一步中创建的配置文件创建后端：</block>
+  <block id="3204b0a88f0c8e6cb89ef2653173ddf1" category="paragraph">您可以创建存储类来配置采用Kerberos加密的卷。</block>
+  <block id="03111bbdda72125f143e084557265c1c" category="paragraph">创建存储类对象时、可以使用参数指定以下三种不同版本的Kerberos加密之一<block ref="e1d3d66c5926aa7fbc3186da8f9b476b" prefix=" " category="inline-code"></block> ：</block>
+  <block id="85eee746a5d30d5149d419a3dfd2fe4e" category="list-text"><block ref="ebd2fabd7ee9d78e670334fba38c5a6b" prefix="" category="inline-code"></block> (身份验证和加密)</block>
+  <block id="24dac19871e9929a42267b538a60ebe5" category="list-text"><block ref="82f5845550ca9ab77ce797c16bd7bca1" prefix="" category="inline-code"></block> (身份验证和加密以及身份保护)</block>
+  <block id="c36d9d41da2e174bfa8b3338450fb45c" category="list-text"><block ref="7a1dedb8f6c22fd4833b45267ad3b01a" prefix="" category="inline-code"></block> (身份验证和加密以及身份和隐私保护)</block>
+  <block id="4a2e7c9ecf75ac18d4daec2783256280" category="paragraph">请仅指定一个Kerberos级别。如果在参数列表中指定多个Kerberos加密级别、则仅会使用第一个选项。如果您在存储后端配置中指定的加密级别与您在存储类对象中指定的加密级别不同、则存储类对象优先。</block>
+  <block id="0bae6577bb0c45b6f2d82896713df9f9" category="list-text">使用以下示例创建StorageClass Kubenetes对象：</block>
+  <block id="bd9c5e9bd5f130a6fbdbcaeb04656652" category="list-text">创建存储类：</block>
+  <block id="2472867b1c2b8a486fe64cfc08afeba5" category="list-text">确保已创建存储类：</block>
+  <block id="d0848afd8553c34945705222a97a4553" category="paragraph">您应看到类似于以下内容的输出：</block>
+  <block id="0a44f30bac4e15e0464a80627bef5882" category="section-title">配置卷</block>
+  <block id="df5d2586ae35677e5d1b74f6bf22fc4a" category="inline-link">配置卷</block>
+  <block id="d54dd0bd4d4709e0b61979c77050c4f3" category="paragraph">创建存储后端和存储类后、您现在可以配置卷。请参阅这些说明<block ref="45693932e20b39f3b16747f62135000b" category="inline-link-rx"></block>。</block>
+  <block id="fe10ad21eb1ce607c403a8d609d5ab3e" category="section-title">为Azure NetApp Files卷配置传输中的Kerberos加密</block>
+  <block id="cd21e25bc313d3805456542eac624499" category="paragraph">您可以对受管集群与单个Azure NetApp Files存储后端或Azure NetApp Files存储后端虚拟池之间的存储流量启用Kerberos加密。</block>
+  <block id="bf08e3747af8cdb14b7eaf98563b8d7e" category="inline-link-macro">启用Asta Control配置程序</block>
+  <block id="6f6708d43f002178ebd42b453faca11e" category="list-text">确保已在受管Red Hat OpenShift集群上启用Asta Control配置程序。有关说明、请参见 <block ref="09bb7a105629f922c89dc5bfe800e3ad" category="inline-link-macro-rx"></block> 。</block>
+  <block id="6c32a3d0f1a665987b98dde5a0f96d7d" category="inline-link">Azure NetApp Files 文档</block>
+  <block id="aa63a31f222305a4ce10d8c1020ab1fd" category="list-text">请注意要求并按照中的说明，确保已为Kerberos加密准备好Azure NetApp Files存储后端<block ref="54b351b1767d2d50eb8c87e19c20164c" category="inline-link-rx"></block>。</block>
+  <block id="4f07c8d51fef64025d4b746305177733" category="paragraph">您可以创建包含Kerberos加密功能的Azure NetApp Files存储后端配置。</block>
+  <block id="5c6eaa8dd4c4134f6ad836e97ffdee13" category="paragraph">在创建配置Kerberos加密的存储后端配置文件时、您可以对其进行定义、使其应用于以下两个可能的级别之一：</block>
+  <block id="bc0557be41ea94e344d7ece1f311b7d4" category="list-text">使用字段的*存储后端级别*<block ref="6a60a6d9955ef9fce24cf4e86efed7af" prefix=" " category="inline-code"></block></block>
+  <block id="e30ee9a2b9976217a5fe28b412fe04d6" category="list-text">使用字段的*虚拟池级别*<block ref="533988f6253fcffab6270c1aafb50970" prefix=" " category="inline-code"></block></block>
+  <block id="64864cec765a0e5c421369098904873c" category="paragraph">在虚拟池级别定义配置时、系统会使用存储类中的标签来选择该池。</block>
+  <block id="082ccae8192fda90d271d92200b3a7dd" category="paragraph">在任一级别、您都可以指定以下三种不同版本的Kerberos加密之一：</block>
+  <block id="853434fc4aabccb1e3341f56ef2a9424" category="list-text"><block ref="9ce0da43b8420d1a89f0d00da04312a2" prefix="" category="inline-code"></block> (身份验证和加密)</block>
+  <block id="44ea74e03aa9994870273996b8770ef6" category="list-text"><block ref="6bbaa5deea5e26abf8837d31bd265b6f" prefix="" category="inline-code"></block> (身份验证和加密以及身份保护)</block>
+  <block id="e22427c81cd5155061fad66ed3f13f52" category="list-text"><block ref="42b55bed7d0514cd2e2189a3edc9d87b" prefix="" category="inline-code"></block> (身份验证和加密以及身份和隐私保护)</block>
+  <block id="c51fc706f0eb21d747d3ff2e2bb6c38b" category="list-text">在受管集群上、根据需要定义存储后端的位置(存储后端级别或虚拟池级别)、使用以下示例之一创建存储后端配置文件。将括号&lt;&gt;中的值替换为您环境中的信息：</block>
+  <block id="d51a5db438981d465f8fecc7ecbeb054" category="open-title">存储后端级别示例</block>
+  <block id="83aab9b6ffc8c65b79350e009c49e5f4" category="open-title">虚拟池级别示例</block>
+  <block id="5220375a520b7758aa31b8b43ce717fe" category="summary">Astra Control配置程序支持在源卷和目标卷之间创建镜像关系、以复制卷以实现灾难恢复。</block>
+  <block id="50e2eea9ba53d70147772db1c5d25f79" category="doc">使用SnapMirror复制卷</block>
+  <block id="d0182feabbbe0987e5c6aed407b4c2a7" category="paragraph">您可以使用Astra Control配置程序在一个集群上的源卷和对等集群上的目标卷之间创建镜像关系、以便为灾难恢复复制数据。您可以使用具有名称流的自定义资源定义(CRD)执行以下操作：</block>
+  <block id="a682d8ef86abcae6c5a1db6186c5f02b" category="list-text">在卷之间创建镜像关系(PVC)</block>
+  <block id="31a8f98d3378661a5b8abf15438f0bca" category="list-text">删除卷之间的镜像关系</block>
+  <block id="a6349012892be516e5729d501a9649a7" category="list-text">中断镜像关系</block>
+  <block id="2597cb6d27f572bb6d7d2fd15f414795" category="list-text">在灾难情况下提升二级卷(故障转移)</block>
+  <block id="40f7c55be912a395aed2502927d3fcfa" category="list-text">在集群之间执行应用程序无中断过渡(在计划内故障转移或迁移期间)</block>
+  <block id="d193cd9a2432eca22e5cf0d06dcee1e6" category="section-title">复制前提条件</block>
+  <block id="55be807bf2be012ff44a04449cc5e8a8" category="paragraph">开始之前、请确保满足以下前提条件：</block>
+  <block id="3404cce75db90acf6a9d52860721a139" category="list-title">ONTAP 集群</block>
+  <block id="5764ffcba90184d76761806e7e8395b9" category="list-text">*Astra控件配置程序*：Astra控件配置程序23.10或更高版本必须位于使用ONTAP作为后端的源和目标Kubernetes集群上。</block>
+  <block id="ba84728ffba482ceb12371a53be2f636" category="inline-link">ONTAP 中的SnapMirror许可概述</block>
+  <block id="b677eb65f7f869d18b845725a133a8d5" category="list-text">*许可证*：必须在源和目标ONTAP集群上启用使用数据保护包的ONTAP SnapMirror异步许可证。有关详细信息、请参见<block ref="a7b9425cefc4a3715b38951f4b2b6b35" category="inline-link-rx"></block> 。</block>
+  <block id="5cc8ada79224d850ecd22fd22e550c47" category="list-title">对等</block>
+  <block id="9fecd08b776fdfca7b33426363edf913" category="inline-link">集群和 SVM 对等概述</block>
+  <block id="02b05cdd8f0a8c426f307085cc1004f7" category="list-text">*集群和SVM*：ONTAP存储后端必须建立对等状态。有关详细信息、请参见<block ref="60333a598df416e49fbceb5a88dce370" category="inline-link-rx"></block> 。</block>
+  <block id="94ac6b3955eab183cb88ab17c91000eb" category="admonition">确保两个ONTAP集群之间的复制关系中使用的SVM名称是唯一的。</block>
+  <block id="11b4eae81775a6d26d41d2ca42309c91" category="list-text">*Astra Control置备程序和SVM*：对等远程SVM必须可供目标集群上的Astra Control置备程序使用。</block>
+  <block id="0c5e1b5bc54261ccadd2a72af1047ded" category="list-title">支持的驱动程序</block>
+  <block id="57601c13c06c6ac6e23efaab44ced427" category="list-text">ONTAP -NAS和ONTAP SAN驱动程序支持卷复制。</block>
+  <block id="3ce5b83f8896ef0d2e356d3972ec8898" category="section-title">创建镜像PVC</block>
+  <block id="427a1ab7f39ee4f2dd7a0b7e35f572da" category="paragraph">按照以下步骤并使用CRD示例在主卷和二级卷之间创建镜像关系。</block>
+  <block id="4dc69f665f0d76c17a577a352dd15b25" category="list-text">在主Kubbernetes集群上执行以下步骤：</block>
+  <block id="cffc5263be00a76539edeeff72190d54" category="list-text">使用参数创建StorageClass对象<block ref="23041ca302bab724a5a0a4ee923c745d" prefix=" " category="inline-code"></block> 。</block>
+  <block id="f1fe26832c26eb686c85bd72da8a62f1" category="list-text">使用先前创建的StorageClass创建PVC。</block>
+  <block id="a306778c7affcc4dd2329c7f1e9a6389" category="list-text">使用本地信息创建镜像关系CR。</block>
+  <block id="f55994c0c11fac6e31cbb70581f696f0" category="paragraph">Astra Control配置程序会提取卷的内部信息以及卷的当前数据保护(DP)状态、然后填充镜像关系的状态字段。</block>
+  <block id="7e36329a511f28054ceb0cb2aba7de3a" category="list-text">获取TridentMirorRelationship CR以获取PVC的内部名称和SVM。</block>
+  <block id="ce01c03f932076e82348fc5aaefacc7d" category="list-text">在二级Kubbernetes集群上执行以下步骤：</block>
+  <block id="dbe7fac150e57be9bc0d8e046792f4c3" category="list-text">使用trident.netapp.io/replication: true参数创建StorageClass。</block>
+  <block id="01d68e0f9630c032dc8a33358e46e65b" category="list-text">使用目标和源信息创建镜像关系CR。</block>
+  <block id="960441627a9e57f3614bc5e5fce9a5ff" category="paragraph">Asta控件配置程序将使用配置的关系策略名称(或ONTAP的默认策略名称)创建SnapMirror关系并对其进行初始化。</block>
+  <block id="4ba5d2a91c95149a7ad924ebd0d9503d" category="list-text">使用先前创建的StorageClass创建一个PVC以用作二级(SnapMirror目标)。</block>
+  <block id="efe874c809f0fe07e9ccbe31c010017a" category="paragraph">Astra Control配置程序将检查是否存在TridentMirorRelationship CRD、如果此关系不存在、则无法创建卷。如果存在此关系、Astra控件配置程序将确保将新FlexVol卷放置到与镜像关系中定义的远程SVM建立对等关系的SVM上。</block>
+  <block id="e71d1a5cbaac30e63ed507e4b62c705f" category="section-title">卷复制状态</block>
+  <block id="35a5ab9faaa73d6bfb24393f7b676624" category="paragraph">三级镜像关系(TCR)是一种CRD、表示PVC之间复制关系的一端。目标T关系 管理器具有一个状态、该状态会告诉Astra Control配置程序所需的状态是什么。目标T关系 管理器具有以下状态：</block>
+  <block id="546afd3b22376f948ae8d790e441d7da" category="list-text">*已建立*：本地PVC是镜像关系的目标卷、这是一个新关系。</block>
+  <block id="724cfb5ec8bac42a80699bb79c4eccb9" category="list-text">*提升*：本地PVC可读写并可挂载、当前未建立任何有效的镜像关系。</block>
+  <block id="d323366aa32e60d08a0f93bda543af47" category="list-text">*重新建立*：本地PVC是镜像关系的目标卷、以前也位于该镜像关系中。</block>
+  <block id="4c3cd5b62a43e82e03fffa6b238ed918" category="list-text">如果目标卷曾经与源卷建立关系、因为它会覆盖目标卷的内容、则必须使用重新建立的状态。</block>
+  <block id="b2e7dc07859cd924ca5706b299986e57" category="list-text">如果卷之前未与源建立关系、则重新建立的状态将失败。</block>
+  <block id="93f9c6ccc7d85e709509db31891ae5eb" category="section-title">在计划外故障转移期间提升辅助PVC</block>
+  <block id="4a76c8d930ec18b5aedc26b5d8e5246f" category="paragraph">在二级Kubbernetes集群上执行以下步骤：</block>
+  <block id="78ac02218b5a9367bdcb4881538477cc" category="list-text">将TridentMirorRelationship的_spec.state_字 段更新到<block ref="1fe57d6202c7cfbb0ee344b1e0a6fb37" prefix=" " category="inline-code"></block>。</block>
+  <block id="ffe4cfc202d643b50342b93a4a11a82f" category="section-title">在计划内故障转移期间提升辅助PVC</block>
+  <block id="1d60b89a076d7f30b8efdef50e842f68" category="paragraph">在计划内故障转移(迁移)期间、执行以下步骤以提升二级PVC：</block>
+  <block id="3310d9a60c164accb7c262ab6e9fbc65" category="list-text">在主Kubbernetes集群上、创建PVC的快照、并等待创建快照。</block>
+  <block id="8b17b79902950942165541a8ab704363" category="list-text">在主Kubnetes集群上、创建SnapshotInfo CR以获取内部详细信息。</block>
+  <block id="678346d79faaa65b2da52e6d7ddce845" category="list-text">在二级Kubernetes集群上、将_TridentMirorRelationship_ CR的_spec.state_字 段更新为_promoted_和_spec.promotedSnapshotHandle_、以成为快照的内部名称。</block>
+  <block id="7b007b14980acd66e9301e02a5670f47" category="list-text">在二级Kubernetes集群上、确认Trident镜像 关系的状态(stats.state字段)为已提升。</block>
+  <block id="f69101c0107c4bbf8f0ccc9141beb68b" category="section-title">在故障转移后还原镜像关系</block>
+  <block id="9a023cbe1d3be933d8edb6228f9901ce" category="paragraph">在还原镜像关系之前、请选择要用作新主卷的那一端。</block>
+  <block id="1c7011adbcc0afa258396aff4f10266b" category="list-text">在二级Kubernetes集群上、确保已更新TundentMirorRelationship上的_spic.netVolumeHandle_字段的值。</block>
+  <block id="ffb25f01fda2538ae98bc0c4b4d465a6" category="list-text">在二级Kubernetes集群上，将Trident镜像 关系的_spec.mirector_字段更新到<block ref="036bbe13de7250844b100bc381b59214" prefix=" " category="inline-code"></block>。</block>
+  <block id="41a593c0bede63aac2726a18e4599087" category="section-title">其他操作</block>
+  <block id="429ffe8f0aaccc8922acaae0bea825a8" category="paragraph">Asta Control配置程序支持在主卷和二级卷上执行以下操作：</block>
+  <block id="253093d00b66ff2357df5085c04b2758" category="section-title">将主PVC复制到新的二级PVC</block>
+  <block id="301dcece9e67241c29ebbbac8a94274e" category="paragraph">确保您已有一个主PVC和一个次要PVC。</block>
+  <block id="7f1c32cba6b98d1db7f3dfda1df76189" category="list-text">从已建立的二级(目标)集群中删除PerbestentVolumeClaim和TridentMirorRelationship CRD。</block>
+  <block id="e655fd5342cff178f54ae5f5b2a3b7b6" category="list-text">从主(源)集群中删除TridentMirorRelationship CRD。</block>
+  <block id="3eb69a135044d3f308d140dccb1dbe5e" category="list-text">在主(源)集群上为要建立的新二级(目标) PVC创建新的TridentMirorRelationship CRD。</block>
+  <block id="92c650dfb6284b5d24ed0e83a2338fa0" category="section-title">调整镜像、主PVC或二级PVC的大小</block>
+  <block id="66990a43216d28b5b6818b021d397574" category="paragraph">可以正常调整PVC的大小、如果数据量超过当前大小、ONTAP将自动扩展任何目标flevxvol。</block>
+  <block id="4e2626fed5da19a4be8255f16a331609" category="section-title">从PVC中删除复制</block>
+  <block id="e1abf7fa65d845d34c33d593ed070453" category="paragraph">要删除复制、请对当前二级卷执行以下操作之一：</block>
+  <block id="b3dd2c563dffb09f03c72bc16a72be62" category="list-text">删除次要PVC上的镜像关系。此操作将中断复制关系。</block>
+  <block id="413ab8e64d0d4ccb3f08ef2a8653a525" category="list-text">或者、将spec.state字段更新为_promoted_。</block>
+  <block id="c00cff9971607d7a0409066a0ecc3bcd" category="section-title">删除PVC (之前已镜像)</block>
+  <block id="21c248e83f23afe590db7c4471350f23" category="paragraph">ASRA Control配置程序会检查是否存在复制的PVC、并在尝试删除卷之前释放复制关系。</block>
+  <block id="8ec9c60105332c1be8facc42b496e14b" category="section-title">删除TTr</block>
+  <block id="b4d20a51885b1a7645c486448d720b7e" category="paragraph">删除镜像关系一端的T磁 还原会导致剩余的T磁 还原在Astra Control配置程序完成删除之前过渡到_promoted状态。如果选定要删除的TMirror已处于_Promote _状态、则不存在现有镜像关系、此时TMirror将被删除、Astra Control配置程序会将本地PVC提升为_ReadWrite_。此删除操作将释放ONTAP中本地卷的SnapMirror元数据。如果此卷将来要在镜像关系中使用、则在创建新镜像关系时、它必须使用具有_re设立_卷复制状态的新TMirror。</block>
+  <block id="d41660149eb8930ad76a1dfe3dc5f2e3" category="section-title">在ONTAP联机时更新镜像关系</block>
+  <block id="7079164c5ba86439b0719782591106dd" category="paragraph">建立镜像关系后、可以随时更新这些关系。您可以使用<block ref="abb3a949c6d70e3e5d92f4ad2bf143a3" prefix=" " category="inline-code"></block> 或<block ref="ff0b4e3d4dfe8f6074b6943947345d4d" prefix=" " category="inline-code"></block> 字段更新关系。将目标卷提升为常规ReadWrite卷时、可以使用_promotedSnapshotHandle_指定要将当前卷还原到的特定快照。</block>
+  <block id="4eecab048a7c90cfb92e0f04884686e8" category="section-title">在ONTAP脱机时更新镜像关系</block>
+  <block id="e3b68b1c19a14af5fcb94e147290aec6" category="paragraph">您可以使用CRD执行SnapMirror更新、而Astra Control不直接连接到ONTAP集群。请参阅以下TridentAction镜像 更新的示例格式：</block>
+  <block id="bc08468157c4a9e3a30eed7ba64cc309" category="paragraph"><block ref="1f9dfae8a369525bce4996df40963532" prefix="" category="inline-code"></block> 反映TridentAction镜像 更新CRD的状态。它可以从_suced_、_in Progress _或_failed中获取值。</block>
+  <block id="261f0b7f37f0dd290043aab033357d32" category="summary">启用Asta Control配置程序以访问高级存储配置和管理功能。</block>
+  <block id="372270db22900d45998a077917ef04e1" category="paragraph">Trident 23.10及更高版本提供了使用Astra Control配置程序的选项、允许获得许可的Astra Control用户访问高级存储配置功能。除了基于标准Asta三端CSI的功能之外、Asta Control配置程序还提供了此扩展功能。您可以使用此操作步骤启用和安装Astra控件配置程序。</block>
+  <block id="fe562808e3d8ddc1360f041ac9ecb065" category="paragraph">您的Astra Control Service订阅会自动包含Astra Control配置程序使用的许可证。</block>
+  <block id="f2e4c52f80f28c72fda2741d6bbe571d" category="paragraph">在即将推出的Astra Control更新中、Astra Control配置程序将取代Astra Trandent作为存储配置程序和流程编排程序、并且Astra Control必须使用它。因此、强烈建议Asta Control用户启用Asta Control配置程序。Asta三元数据将继续保持开源状态、并使用NetApp的新CSI和其他功能进行发布、维护、支持和更新。</block>
+  <block id="ef7cd57a49dea042053eb666f78bd5b8" category="paragraph-title">如何知道是否需要启用Astra Control配置程序？</block>
+  <block id="4a78505266dc87d60e1a9c0e6055a555" category="inline-link-macro">将集群添加到Asta Control</block>
+  <block id="d714811f6da2ed431b6eca95b73f5d45" category="paragraph">如果您向Astra Control Service中添加的集群之前未安装Astra三端磁盘，则该集群将标记为<block ref="4358876405775b10c44268aeeeec5f50" prefix=" " category="inline-code"></block>。之后 <block ref="75139e2f1b4db9a393ec7ec4bdabdbe4" category="inline-link-macro-rx"></block>，A作用 力控制配置程序将自动启用。</block>
+  <block id="5d7a456d65366314253c7e21aba42172" category="paragraph">如果未标记集群，则会因为以下原因之一而标记该集群<block ref="4358876405775b10c44268aeeeec5f50" prefix=" " category="inline-code"></block><block ref="452b2caa4d3425293734c7cc9206a4b3" prefix=" " category="inline-code"></block> ：</block>
+  <block id="9585e5b63f95bef1b4fd569541c78342" category="list-text">它使用的是旧版本的Asta三端到子</block>
+  <block id="87c76fd90e61cbd3116a0099aca89325" category="list-text">它使用的是A作用 于三端的23.10、但尚未启用配置程序选项</block>
+  <block id="eaf1911fc60b6d69a319ebdf0480e0ca" category="list-text">此集群类型不允许自动启用</block>
+  <block id="1fbfdc858b0f52a228444f0fd80e23ea" category="paragraph">对于<block ref="452b2caa4d3425293734c7cc9206a4b3" prefix=" " category="inline-code"></block> 这种情况、请按照以下说明手动为集群启用Asta Control配置程序。</block>
+  <block id="6a45b1d4132918a64c028520724d18e3" category="inline-image-macro">屏幕截图显示了添加集群工作流中的集群资格</block>
+  <block id="057afae3fe65d4f24b79bd50d34734b1" category="paragraph"><block ref="057afae3fe65d4f24b79bd50d34734b1" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="7753d368684bfc31807afc2b7f3cd9c0" category="paragraph-title">在启用Astra Control配置程序之前</block>
+  <block id="0360a2e5fb08211931ade5b67746abd1" category="paragraph">如果您现有的Asta Trident没有Asta Control配置程序、但要启用Asta Control配置程序、请首先执行以下操作：</block>
+  <block id="fa11ed24405872fcaff3d72114365e10" category="list-text">*如果您安装了Astra三端安装程序，请确认其版本在四个版本的窗口内*：如果您的Astra三端安装程序在版本24.02的四个版本窗口内，则可以使用Astra Control置备程序直接升级到Astra三端安装程序24.02。例如、您可以直接从Asta三端23.04升级到24.02。</block>
+  <block id="513c5f0b4153f3c855edd085e129578d" category="list-text">*确认集群具有一个AMD64*系统架构：Astra Control配置程序映像在amd64和ARM64 CPU架构中都提供，但Astra Control仅支持amd64。</block>
+  <block id="cc74ae067ae4451424c2712fd0b0a766" category="list-text">访问NetApp Astra控件映像注册表：</block>
+  <block id="f16793904b509a3f7a260653784d0c7b" category="list-text">登录到Astra Control Service UI并记录您的Astra Control帐户ID。</block>
+  <block id="8cbb6fb4fc8e72b38ebb357b93aac0e6" category="list-text">选择页面右上角的图图标。</block>
+  <block id="28478864077d4a55fa88e064f317cc13" category="list-text">选择* API访问*。</block>
+  <block id="054eff009cdf03269a420a2370e7dea5" category="list-text">记下您的帐户ID。</block>
+  <block id="247c4bd908bc1de2fd5a809200d877d2" category="list-text">在同一页面中，选择*Generate API t令牌*并将API令牌字符串复制到剪贴板，然后将其保存在编辑器中。</block>
+  <block id="98720da814dca1d713a7ea34c223cc71" category="list-text">使用您的首选方法登录Astra Control注册表：</block>
+  <block id="cbad356d2a2c08e20ea2766c2d78305f" category="inline-xref">下一节</block>
+  <block id="bc50f89e7547553ce82affde0adc4c76" category="list-text">(仅限自定义注册表)按照以下步骤将图像移动到自定义注册表。如果您不使用注册表，请按照中的“三端”运算符步骤操作 <block ref="d433543a9de56c735bd2827329689b0d" category="inline-xref-macro-rx"></block>。</block>
+  <block id="be1ad1396eeb1a14ec670f22fa8db431" category="admonition">以下命令可以使用Podman、而不是Docker。如果您使用的是Windows环境、建议使用PowerShell。</block>
+  <block id="dfd1625b65bec1b019b2006f2a2d6f7f" category="list-text">从注册表中提取Asta Control配置程序映像：</block>
+  <block id="e6fa19c87424a75415bf86154af17fd6" category="admonition">提取的映像不支持多个平台、只支持与提取映像的主机相同的平台、例如Linux amd64。</block>
+  <block id="81eeab9506186e2dca8faefa78d54067" category="paragraph">示例：</block>
+  <block id="2bd126572bba3a2e960ce1c5f2a946bf" category="list-text">标记图像：</block>
+  <block id="1bfe2fd1955082292d7e5903ef66a782" category="list-text">将映像推送到自定义注册表：</block>
+  <block id="91c18a5dec9cf1fbb20ffffd101409cd" category="open-title">起重机</block>
+  <block id="1165b577af138b2a4ee1e0d044eea398" category="list-text">将Asta Control配置程序清单复制到自定义注册表：</block>
+  <block id="b948a23f0cbc4ea95e165a5489a3b7ce" category="inline-link">运算符(手动或使用Helm)或&lt;Block ref="c67fd1b99934afa248dfeb285a9a4191" prefref="" CATEGORI='inline-code'/&gt;</block>
+  <block id="55b03f72140649802821ee27f611f93d" category="list-text">确定原来的Asta三端安装方法是否使用了<block ref="a1a09c66ad6b9d6162d6a0a2aaef123f" category="inline-link-rx"></block>。</block>
+  <block id="635815058628a337f65c0953162ac32e" category="list-text">使用您最初使用的安装方法在Asta Trdent中启用Asta Control配置程序：</block>
+  <block id="df0a28182823b029a1d84bec05a7726e" category="open-title">Asta三端操作员</block>
+  <block id="b88c081e2a4b249f94292c6f7bf16bdc" category="inline-link">下载Asta三端安装程序并解压缩</block>
+  <block id="f1f44f407a364d092b4a3b446d6593b5" category="list-text"><block ref="5512264baa78f7d10bb082092407833c" category="inline-link-rx"></block>(英文)</block>
+  <block id="b53ea1f6729ee2c1c5dc303c5e9bb360" category="list-text">如果您尚未安装Astra三端安装程序、或者您从初始Astra三端安装程序中删除了操作员、请完成以下步骤：</block>
+  <block id="1802fc07d2de18110ae52621540f337e" category="list-text">创建客户需求日：</block>
+  <block id="b19df824e7baecb971d0fdd39542c6d6" category="list-text">创建三端命名空间 <block ref="a40796e67d7096bdb1a461d9369987ae" prefix="(" category="inline-code"></block>)或确认三端命名空间仍然存在 <block ref="929ac53a7aaa18d0ab7bfd29e3b89c45" prefix="(" category="inline-code"></block>)。如果已删除此命名空间、请重新创建它。</block>
+  <block id="2ef8c3c36d9188d9ee49c78edd817912" category="list-text">将Astra Trdent更新到24.06.0：</block>
+  <block id="84b3a17dd4da0cadee9516d2c742e8e1" category="admonition">对于运行Kubornetes 1.24或更早版本的集群，请使用<block ref="bd2cc8575fe69c7f775292759380c838" prefix=" " category="inline-code"></block>。对于运行Kubernetes 1.25或更高版本的集群，请使用<block ref="5a02ebff4889c2de0379a0fb10bed282" prefix=" " category="inline-code"></block>。</block>
+  <block id="4cf0920f58032b65295d4d0255354879" category="list-text">验证Astra trident是否正在运行：</block>
+  <block id="54472d1da4b0c6eadf8684e846b25dcc" category="paragraph">响应：</block>
+  <block id="70da7fdb746f99191502821d5d3b6d53" category="list-text">[[pull机密]]如果您有一个使用机密的注册表，请创建一个用于提取Astra Control置备程序映像的密钥：</block>
+  <block id="531dc1bead45003a393e1e227a07b0fa" category="list-text">编辑TridentOrchestrator CR并进行以下编辑：</block>
+  <block id="5a3079c9cd04eea596744e2187f70142" category="list-text">为Asta三端图像设置自定义注册表位置，或从Asta Control注册表或中提取该位置 <block ref="c063da0c4010a4b533407346a02dd83c" prefix="(" category="inline-code"></block><block ref="229b44e1a628432d62b4cedc033aedf6" prefix=" " category="inline-code"></block>。</block>
+  <block id="8b1959e0a8b41248dad790a861dbfdd9" category="list-text">启用Asta Control配置程序 <block ref="b146a884950a14beaf7f7c32ccceea96" prefix="(" category="inline-code"></block>)。</block>
+  <block id="1e402f84b3c57afa8aaf19779147556d" category="list-text">设置Asta Control置配置程序映像的自定义注册表位置，或从Asta Control注册表或中提取该映像 <block ref="6fd47d0a38cf5afec555b659aaed6104" prefix="(" category="inline-code"></block><block ref="e419be77a3ebdbec678982ec1d2d40b2" prefix=" " category="inline-code"></block>。</block>
+  <block id="9f28a023f26c22c040e88a7f3791d0ed" category="inline-xref">图像拉取密钥</block>
+  <block id="f3a11fe989360f45110df3758e7f0641" category="list-text">如果您在本过程的前面已建立 <block ref="565c9dfc4921fbeccbde323bc8a44cad" category="inline-xref-macro-rx"></block> ，则可以在此处进行设置 <block ref="bafdae7aa6abb1556ef1b0d17efe7509" prefix="(" category="inline-code"></block>)。使用您在前面步骤中创建的相同名称机密名称。</block>
+  <block id="aa3ae8b6c1e4a29f9314a8bbc401330f" category="list-text">保存并退出文件。部署过程将自动开始。</block>
+  <block id="4f27e6f7f8f95f32f55540801c5f6db0" category="list-text">验证是否已创建操作员、部署和副本集。</block>
+  <block id="6849b59104c35075b063cf35570fde13" category="admonition">在 Kubernetes 集群中只能有 * 一个操作符实例 * 。请勿创建多个部署的Asta三端操作员。</block>
+  <block id="faba39ec34eed502aea6d805d792a9ea" category="list-text">验证<block ref="49c9f6c98d04c8c76aee7448fd9136ed" prefix=" " category="inline-code"></block> 容器是否正在运行且<block ref="507c6bbca2ad57c69e89a97ee8714536" prefix=" " category="inline-code"></block><block ref="50ce33a86e6915635518e9752cf0a12f" prefix=" " category="inline-code"></block> 状态为<block ref="98dd43dfae05b11befe1f140e0ec787a" prefix=" " category="inline-code"></block>：</block>
+  <block id="6942401e8cfb1a0fc7b82ec1dcda7d32" category="list-text"><block ref="b0e92e3807bd982cc8fd58230062a04f" category="inline-link-rx"></block>(英文)</block>
+  <block id="a65211330b142f51904ccfb3741cc124" category="inline-link">如果您已有Asta Trident、请从托管它的集群中将其卸载</block>
+  <block id="00c4331aab8ed2101088511f96b6af8e" category="list-text"><block ref="f21e19b64d79b0da0ff48729d1b28669" category="inline-link-rx"></block>(英文)</block>
+  <block id="005a56f182fe268e9f6977b39114eab8" category="list-text">在启用Asta Control配置程序的情况下安装Asta Trent <block ref="87d6b9737ff6f9e44e3dd25c182cf495" prefix="(" category="inline-code"></block>)：</block>
+  <block id="11015cc0e053d44034684218fbb49508" category="list-text">确认已启用Asta Control配置程序：</block>
+  <block id="e87cd9f9f3f0bdb5a644fb2aa2415f5b" category="list-text">如果您安装了Astra Trident 23.07.1或更早版本、<block ref="956dce94688d94fac89c002857c93b5d" category="inline-link-rx"></block> 则需要操作员和其他组件。</block>
+  <block id="c35a7e0e7f42e740c64a0b6fdade1fe3" category="list-text">如果您的Kubornetes集群运行的是1.24或更早版本、请删除PSP：</block>
+  <block id="02cc60ae4326121ce3bc2b5fdb24de58" category="list-text">更新Helm图表：</block>
+  <block id="b0f226ab4f18ed3c3dd4ee74affdea76" category="list-text">列出图像：</block>
+  <block id="be7552e8e2fb2ab01d08b162bf54e206" category="list-text">确保提供了三项运算符24.06.0：</block>
+  <block id="70b739f3363e6b3cd5f0c896d90af9c6" category="list-text">使用<block ref="0562418e6d9a76d0dd22b2f186a2203d" prefix=" " category="inline-code"></block> 并运行包括这些设置的以下选项之一：</block>
+  <block id="9fe27ee3cf7416ee3af4516cf89a2b4c" category="list-text">部署位置的名称</block>
+  <block id="8d4c721df5c5b813b86a2d1eb619c735" category="list-text">Astra三端版本</block>
+  <block id="7dba4177f42e6622145f408eb88b1cba" category="list-text">Asta Control配置程序映像的名称</block>
+  <block id="7b0fc32fdb3c2378c2c39008d29aaa43" category="list-text">用于启用配置程序的标志</block>
+  <block id="37ee7516a84d6949e4e0bde03e129758" category="inline-link">｛\f270｛\f151｛\f270｝</block>
+  <block id="29e638c426512b56521aa694976562ea" category="list-text">(可选)本地注册表路径。如果您使用的是本地注册表、则<block ref="97e5914991475a979ee93ba0d709c399" category="inline-link-rx"></block> 可以位于一个注册表或不同的注册表中、但所有CSI图像都必须位于同一注册表中。</block>
+  <block id="4795c928314a82e5be360b646a3a3aac" category="list-text">三端名称空间</block>
+  <block id="804c8c9903e49e8cab0717f41b883f9a" category="list-text">没有注册表的映像</block>
+  <block id="3e10c4dd91af2dc1835b50343bc5fbd0" category="list-text">一个或多个注册表中的图像</block>
+  <block id="d09a3f23170df63b9065e78b7eb80224" category="paragraph">如果您在使用Helm部署TRIdent时遇到任何问题、请运行此命令以完全卸载Asta TRIdent：</block>
+  <block id="3897d04922674a762953f58e38463cb0" category="inline-link">完全删除Asta Trdent CRD</block>
+  <block id="98709e6abe377fa2083cb4a36ba22ddc" category="paragraph">*在尝试重新启用Astra Control配置程序之前，请勿*<block ref="d47e0c203a38c85d577cb0ed29c7fad1" category="inline-link-rx"></block> 作为卸载的一部分。</block>
+  <block id="8eea62084ca7e541d918e823422bd82e" category="paragraph-title">结果</block>
+  <block id="e1e016d44c99ff12155d4c6ec97b954b" category="paragraph">Asta Control配置程序功能已启用、您可以使用当前运行的版本可用的任何功能。</block>
+  <block id="bfd6393303a90c7eebadedd13edf658b" category="paragraph">安装Asta Control配置程序后、在Asta Control UI中托管此配置程序的集群将显示一个<block ref="47f79829be244bd727d1881108343390" prefix=" " category="inline-code"></block> 而非<block ref="f1112223b41fddc71fd6a626582dfb78" prefix=" " category="inline-code"></block> 字段以及当前安装的版本号。</block>
+  <block id="b705f14969fa7c55d16aa5c0ef9c37a0" category="inline-image-macro">显示UI中ACP版本位置的屏幕截图</block>
+  <block id="298c14088e0ed4580971821ac46240ba" category="paragraph"><block ref="298c14088e0ed4580971821ac46240ba" category="inline-image-macro-rx" type="image"></block></block>
+  <block id="a368b742ba77bda413a93bc1a4d09ae3" category="inline-link">Asta Trdent升级文档</block>
+  <block id="38798f90f44856e877b3d5951137f166" category="list-text"><block ref="38798f90f44856e877b3d5951137f166" category="inline-link-rx"></block></block>
+  <block id="1738a6ff1f0b418ce16cf74aabdceff1" category="section-title">从快照原位还原卷</block>
+  <block id="b9b1d2445ee19f9cad5acde381148739" category="paragraph">Asta Control配置程序可使用(TSR) CR从快照快速原位还原卷<block ref="2aabb3b01d0d54317a9eeef910e001f6" prefix=" " category="inline-code"></block> 。此CR用作要务Kubbernetes操作、在操作完成后不会持久保留。</block>
+  <block id="7e9a6544782dc63f584ac4ae55e567bd" category="paragraph">Astra Control配置程序支持在<block ref="73a3350a1b91aeb6e2836fdf5975672c" prefix=" " category="inline-code"></block>、、<block ref="3016c12c1db45f14c80c9c1731b9c26a" prefix=" " category="inline-code"></block><block ref="8321592ce24c8a122ecf26a63cfca407" prefix=" " category="inline-code"></block>、<block ref="844e84da8e822b4a33c4d8188da97937" prefix=" " category="inline-code"></block>、、<block ref="bc5779a2d33eeb1304bae57f15920cfc" prefix=" " category="inline-code"></block><block ref="5935ea92cdd7d975b4e764b429f21c01" prefix=" " category="inline-code"></block><block ref="c0d2a793e71b152662b3e8cd2da00620" prefix=" " category="inline-code"></block> 和驱动程序。</block>
+  <block id="e0bc0596a7d966cd8dab3ee0e924c9b5" category="paragraph">您必须具有绑定的PVC和可用的卷快照。</block>
+  <block id="d785d18f53979794a4ef9e08d186e3c4" category="list-text">验证PVC状态是否已绑定。</block>
+  <block id="d0f2b7254060d8a37c98c1eb4289586d" category="list-text">确认卷快照已准备就绪、可以使用。</block>
+  <block id="da6aadede1bc870c9042c660fdf93f25" category="list-text">创建TSR CR。此示例将为PVC和卷快照创建CR<block ref="30520f4f96804df83914260b79f55962" prefix=" " category="inline-code"></block><block ref="06f2874897d3ec8426ec85e0ffda5544" prefix=" " category="inline-code"></block>。</block>
+  <block id="0c9991859e53bf37c58a2fd1233eb478" category="list-text">应用CR以从快照还原。此示例将从Snapshot恢复<block ref="30520f4f96804df83914260b79f55962" prefix=" " category="inline-code"></block>。</block>
+  <block id="e932e8b67111a2dc118d7599f04cdc8b" category="paragraph">Asta Control配置程序从快照还原数据。您可以验证快照还原状态。</block>
+  <block id="454c5148c2a664f37fc49833dc491272" category="list-text">在大多数情况下、如果发生故障、Asta Control配置程序不会自动重试此操作。您需要再次执行此操作。</block>
+  <block id="c83b74c2020dd836f5b401ecda0da78c" category="list-text">没有管理员访问权限的Kubbernetes用户可能必须获得管理员授予的权限、才能在其应用程序命名空间中创建TSR CR。</block>
 </blocks>

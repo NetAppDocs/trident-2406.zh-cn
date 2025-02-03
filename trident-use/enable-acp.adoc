@@ -1,0 +1,383 @@
+---
+sidebar: sidebar 
+permalink: trident-use/enable-acp.html 
+keywords: Astra Control Provisioner install, acp, enable, astra trident upgrade, upgrade trident 
+summary: 启用Asta Control配置程序以访问高级存储配置和管理功能。 
+---
+= 启用Asta Control配置程序
+:hardbreaks:
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Trident 23.10及更高版本提供了使用Astra Control配置程序的选项、允许获得许可的Astra Control用户访问高级存储配置功能。除了基于标准Asta三端CSI的功能之外、Asta Control配置程序还提供了此扩展功能。您可以使用此操作步骤启用和安装Astra控件配置程序。
+
+您的Astra Control Service订阅会自动包含Astra Control配置程序使用的许可证。
+
+在即将推出的Astra Control更新中、Astra Control配置程序将取代Astra Trandent作为存储配置程序和流程编排程序、并且Astra Control必须使用它。因此、强烈建议Asta Control用户启用Asta Control配置程序。Asta三元数据将继续保持开源状态、并使用NetApp的新CSI和其他功能进行发布、维护、支持和更新。
+
+.如何知道是否需要启用Astra Control配置程序？
+如果您向Astra Control Service中添加的集群之前未安装Astra三端磁盘，则该集群将标记为 `Eligible`。之后 link:../get-started/add-first-cluster.html["将集群添加到Asta Control"]，A作用 力控制配置程序将自动启用。
+
+如果未标记集群，则会因为以下原因之一而标记该集群 `Eligible` `Partially eligible` ：
+
+* 它使用的是旧版本的Asta三端到子
+* 它使用的是A作用 于三端的23.10、但尚未启用配置程序选项
+* 此集群类型不允许自动启用
+
+
+对于 `Partially eligible` 这种情况、请按照以下说明手动为集群启用Asta Control配置程序。
+
+image:ac-acp-eligibility.png["屏幕截图显示了添加集群工作流中的集群资格"]
+
+.在启用Astra Control配置程序之前
+如果您现有的Asta Trident没有Asta Control配置程序、但要启用Asta Control配置程序、请首先执行以下操作：
+
+* *如果您安装了Astra三端安装程序，请确认其版本在四个版本的窗口内*：如果您的Astra三端安装程序在版本24.02的四个版本窗口内，则可以使用Astra Control置备程序直接升级到Astra三端安装程序24.02。例如、您可以直接从Asta三端23.04升级到24.02。
+* *确认集群具有一个AMD64*系统架构：Astra Control配置程序映像在amd64和ARM64 CPU架构中都提供，但Astra Control仅支持amd64。
+
+
+.步骤
+. 访问NetApp Astra控件映像注册表：
++
+.. 登录到Astra Control Service UI并记录您的Astra Control帐户ID。
++
+... 选择页面右上角的图图标。
+... 选择* API访问*。
+... 记下您的帐户ID。
+
+
+.. 在同一页面中，选择*Generate API t令牌*并将API令牌字符串复制到剪贴板，然后将其保存在编辑器中。
+.. 使用您的首选方法登录Astra Control注册表：
++
+[source, docker]
+----
+docker login cr.astra.netapp.io -u <account-id> -p <api-token>
+----
++
+[source, crane]
+----
+crane auth login cr.astra.netapp.io -u <account-id> -p <api-token>
+----
+
+
+. (仅限自定义注册表)按照以下步骤将图像移动到自定义注册表。如果您不使用注册表，请按照中的“三端”运算符步骤操作 <<no-registry,下一节>>。
++
+
+NOTE: 以下命令可以使用Podman、而不是Docker。如果您使用的是Windows环境、建议使用PowerShell。
+
++
+[role="tabbed-block"]
+====
+.Docker
+--
+.. 从注册表中提取Asta Control配置程序映像：
++
+
+NOTE: 提取的映像不支持多个平台、只支持与提取映像的主机相同的平台、例如Linux amd64。
+
++
+[source, console]
+----
+docker pull cr.astra.netapp.io/astra/trident-acp:24.02.0 --platform <cluster platform>
+----
++
+示例：
+
++
+[listing]
+----
+docker pull cr.astra.netapp.io/astra/trident-acp:24.02.0 --platform linux/amd64
+----
+.. 标记图像：
++
+[source, console]
+----
+docker tag cr.astra.netapp.io/astra/trident-acp:24.02.0 <my_custom_registry>/trident-acp:24.02.0
+----
+.. 将映像推送到自定义注册表：
++
+[source, console]
+----
+docker push <my_custom_registry>/trident-acp:24.02.0
+----
+
+
+--
+.起重机
+--
+.. 将Asta Control配置程序清单复制到自定义注册表：
++
+[source, crane]
+----
+crane copy cr.astra.netapp.io/astra/trident-acp:24.02.0 <my_custom_registry>/trident-acp:24.02.0
+----
+
+
+--
+====
+. 确定原来的Asta三端安装方法是否使用了。
+. 使用您最初使用的安装方法在Asta Trdent中启用Asta Control配置程序：
++
+[role="tabbed-block"]
+====
+.Asta三端操作员
+--
+.. https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy-operator.html#step-1-download-the-trident-installer-package["下载Asta三端安装程序并解压缩"^](英文)
+.. 如果您尚未安装Astra三端安装程序、或者您从初始Astra三端安装程序中删除了操作员、请完成以下步骤：
++
+... 创建客户需求日：
++
+[source, console]
+----
+kubectl create -f deploy/crds/trident.netapp.io_tridentorchestrators_crd_post1.16.yaml
+----
+... 创建三端命名空间 (`kubectl create namespace trident`)或确认三端命名空间仍然存在 (`kubectl get all -n trident`)。如果已删除此命名空间、请重新创建它。
+
+
+.. 将Astra Trdent更新到24.06.0：
++
+
+NOTE: 对于运行Kubornetes 1.24或更早版本的集群，请使用 `bundle_pre_1_25.yaml`。对于运行Kubernetes 1.25或更高版本的集群，请使用 `bundle_post_1_25.yaml`。
+
++
+[source, console]
+----
+kubectl -n trident apply -f trident-installer/deploy/<bundle-name.yaml>
+----
+.. 验证Astra trident是否正在运行：
++
+[source, console]
+----
+kubectl get torc -n trident
+----
++
+响应：
+
++
+[listing]
+----
+NAME      AGE
+trident   21m
+----
+.. [[pull机密]]如果您有一个使用机密的注册表，请创建一个用于提取Astra Control置备程序映像的密钥：
++
+[source, console]
+----
+kubectl create secret docker-registry <secret_name> -n trident --docker-server=<my_custom_registry> --docker-username=<username> --docker-password=<token>
+----
+.. 编辑TridentOrchestrator CR并进行以下编辑：
++
+[source, console]
+----
+kubectl edit torc trident -n trident
+----
++
+... 为Asta三端图像设置自定义注册表位置，或从Asta Control注册表或中提取该位置 (`tridentImage: <my_custom_registry>/trident:24.02.0` `tridentImage: netapp/trident:24.06.0`。
+... 启用Asta Control配置程序 (`enableACP: true`)。
+... 设置Asta Control置配置程序映像的自定义注册表位置，或从Asta Control注册表或中提取该映像 (`acpImage: <my_custom_registry>/trident-acp:24.02.0` `acpImage: cr.astra.netapp.io/astra/trident-acp:24.02.0`。
+... 如果您在本过程的前面已建立 <<pull-secrets,图像拉取密钥>> ，则可以在此处进行设置 (`imagePullSecrets: - <secret_name>`)。使用您在前面步骤中创建的相同名称机密名称。
+
+
++
+[listing, subs="+quotes"]
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentOrchestrator
+metadata:
+  name: trident
+spec:
+  debug: true
+  namespace: trident
+  *tridentImage: <registry>/trident:24.06.0*
+  *enableACP: true*
+  *acpImage: <registry>/trident-acp:24.06.0*
+  *imagePullSecrets:
+  - <secret_name>*
+----
+.. 保存并退出文件。部署过程将自动开始。
+.. 验证是否已创建操作员、部署和副本集。
++
+[source, console]
+----
+kubectl get all -n trident
+----
++
+
+IMPORTANT: 在 Kubernetes 集群中只能有 * 一个操作符实例 * 。请勿创建多个部署的Asta三端操作员。
+
+.. 验证 `trident-acp` 容器是否正在运行且 `acpVersion` `24.02.0` 状态为 `Installed`：
++
+[source, console]
+----
+kubectl get torc -o yaml
+----
++
+响应：
+
++
+[listing]
+----
+status:
+  acpVersion: 24.02.0
+  currentInstallationParams:
+    ...
+    acpImage: <registry>/trident-acp:24.02.0
+    enableACP: "true"
+    ...
+  ...
+  status: Installed
+----
+
+
+--
+.Tridentctl
+--
+.. https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy-tridentctl.html#step-1-download-the-trident-installer-package["下载Asta三端安装程序并解压缩"^](英文)
+.. https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-tridentctl.html["如果您已有Asta Trident、请从托管它的集群中将其卸载"^](英文)
+.. 在启用Asta Control配置程序的情况下安装Asta Trent (`--enable-acp=true`)：
++
+[source, console]
+----
+./tridentctl -n trident install --enable-acp=true --acp-image=mycustomregistry/trident-acp:24.02
+----
+.. 确认已启用Asta Control配置程序：
++
+[source, console]
+----
+./tridentctl -n trident version
+----
++
+响应：
+
++
+[listing]
+----
++----------------+----------------+-------------+ | SERVER VERSION | CLIENT VERSION | ACP VERSION | +----------------+----------------+-------------+ | 24.02.0 | 24.02.0 | 24.02.0. | +----------------+----------------+-------------+
+----
+
+
+--
+.掌舵
+--
+.. 如果您安装了Astra Trident 23.07.1或更早版本、 https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html#uninstall-a-trident-operator-installation["卸载"^] 则需要操作员和其他组件。
+.. 如果您的Kubornetes集群运行的是1.24或更早版本、请删除PSP：
++
+[listing]
+----
+kubectl delete psp tridentoperatorpod
+----
+.. 添加Astra Trident Helm存储库：
++
+[listing]
+----
+helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
+----
+.. 更新Helm图表：
++
+[listing]
+----
+helm repo update netapp-trident
+----
++
+响应：
+
++
+[listing]
+----
+Hang tight while we grab the latest from your chart repositories...
+...Successfully got an update from the "netapp-trident" chart repository
+Update Complete. ⎈Happy Helming!⎈
+----
+.. 列出图像：
++
+[listing]
+----
+./tridentctl images -n trident
+----
++
+响应：
+
++
+[listing]
+----
+| v1.28.0            | netapp/trident:24.06.0|
+|                    | docker.io/netapp/trident-autosupport:24.06|
+|                    | registry.k8s.io/sig-storage/csi-provisioner:v4.0.0|
+|                    | registry.k8s.io/sig-storage/csi-attacher:v4.5.0|
+|                    | registry.k8s.io/sig-storage/csi-resizer:v1.9.3|
+|                    | registry.k8s.io/sig-storage/csi-snapshotter:v6.3.3|
+|                    | registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.0 |
+|                    | netapp/trident-operator:24.06.0 (optional)
+----
+.. 确保提供了三项运算符24.06.0：
++
+[listing]
+----
+helm search repo netapp-trident/trident-operator --versions
+----
++
+响应：
+
++
+[listing]
+----
+NAME                            CHART VERSION   APP VERSION     DESCRIPTION
+netapp-trident/trident-operator 100.2406.0      24.06.0         A
+----
+.. 使用 `helm install` 并运行包括这些设置的以下选项之一：
++
+*** 部署位置的名称
+*** Astra三端版本
+*** Asta Control配置程序映像的名称
+*** 用于启用配置程序的标志
+*** (可选)本地注册表路径。如果您使用的是本地注册表、则 https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions["｛\f270｛\f151｛\f270｝"^] 可以位于一个注册表或不同的注册表中、但所有CSI图像都必须位于同一注册表中。
+*** 三端名称空间
+
+
+
+
+.选项
+** 没有注册表的映像
+
+
+[listing]
+----
+helm install trident netapp-trident/trident-operator --version 100.2402.0 --set acpImage=cr.astra.netapp.io/astra/trident-acp:24.06.0 --set enableACP=true --set operatorImage=netapp/trident-operator:24.06.0 --set tridentAutosupportImage=docker.io/netapp/trident-autosupport:24.06 --set tridentImage=netapp/trident:24.06.0 --namespace trident
+----
+** 一个或多个注册表中的图像
+
+
+[listing]
+----
+helm install trident netapp-trident/trident-operator --version 100.2402.0 --set acpImage=<your-registry>:<acp image> --set enableACP=true --set imageRegistry=<your-registry>/sig-storage --set operatorImage=netapp/trident-operator:24.06.0 --set tridentAutosupportImage=docker.io/netapp/trident-autosupport:24.06 --set tridentImage=netapp/trident:24.06.0 --namespace trident
+----
+您可以使用 `helm list` 查看安装详细信息、例如名称、命名空间、图表、状态、应用程序版本、 和修订版号。
+
+[NOTE]
+====
+如果您在使用Helm部署TRIdent时遇到任何问题、请运行此命令以完全卸载Asta TRIdent：
+
+[listing]
+----
+./tridentctl uninstall -n trident
+----
+*在尝试重新启用Astra Control配置程序之前，请勿* https://docs.netapp.com/us-en/trident/troubleshooting.html#completely-remove-astra-trident-and-crds["完全删除Asta Trdent CRD"^] 作为卸载的一部分。
+
+====
+--
+====
+
+
+.结果
+Asta Control配置程序功能已启用、您可以使用当前运行的版本可用的任何功能。
+
+安装Asta Control配置程序后、在Asta Control UI中托管此配置程序的集群将显示一个 `ACP version` 而非 `Trident version` 字段以及当前安装的版本号。
+
+image:ac-acp-version.png["显示UI中ACP版本位置的屏幕截图"]
+
+.了解更多信息
+* https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-operator-overview.html["Asta Trdent升级文档"^]
+
