@@ -23,7 +23,7 @@ summary: '您可以使用Trident操作员(手动或使用Helm)或安装Astra Tri
 .<strong> 中有关Astra </strong> 的信息
 [%collapsible%open]
 ====
-* 现在、Asta三端磁盘支持Kubbernetes 1.31。在升级Kubernetes之前升级Trident。
+* Kubernetes 1.30 现已在Astra Trident中得到支持。在升级 Kubernetes 之前先升级Trident 。
 * Asta Trident严格强制在SAN环境中使用多路径配置、并在Multipath.conf文件中使用建议值 `find_multipaths: no`。
 +
 使用非多路径配置或在Multipath.conf文件中使用 `find_multipaths: yes`或 `find_multipaths: smart`值将导致挂载失败。自21.07版本以来、Trident已建议使用 `find_multipaths: no`。
