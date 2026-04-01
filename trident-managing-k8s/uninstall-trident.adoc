@@ -15,7 +15,7 @@ summary: 您应使用与安装Asta三端安装相同的方法卸载Asta三端安
 您应使用与安装Asta三端安装相同的方法卸载Asta三端安装。
 
 .关于此任务
-* 如果您需要修复在升级、依赖关系问题或升级失败或不完整后发现的错误，则应卸载Astra Trident，然后按照该操作的特定说明重新安装早期版本link:../earlier-versions.html["version"]。这是将_降 级_降级到早期版本的唯一建议方法。
+* 如果您需要修复升级后发现的错误、依赖问题或未成功或未完成的升级，则应卸载 Astra Trident 并使用该版本的特定说明重新安装早期版本。这是_降级_到早期版本的唯一建议方法。
 * 为了便于升级和重新安装、卸载Asta Dent不会删除CRD或Asta Dent创建的相关对象。如果您需要完全删除Astra Trident及其所有数据，请参阅link:../troubleshooting.html#completely-remove-astra-trident-and-crds["完全删除Asta Trandent和CRD"]。
 
 
