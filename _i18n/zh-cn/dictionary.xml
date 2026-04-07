@@ -4490,4 +4490,6 @@
   <block id="86b919b2e76fbde1eb7a5db8785b9e7f" category="admonition">要从使用命名空间作用域运算符（版本 20.07 至 20.10）安装的 Astra Trident 进行升级，请使用已安装的 Astra Trident 版本的升级说明。</block>
   <block id="cf355be645efc0bf2885d297c6490a69" category="list-text">如果您要从四版本窗口之外的版本进行升级，请执行多步骤升级。使用您要升级的早期版本的升级说明，升级到符合四版本窗口的最新版本。例如，如果您运行的是 22.01 并希望升级到 24.06：</block>
   <block id="e1d2b7ec66528e55a29a88734b7dd47e" category="paragraph">NetApp 不断改进和增强其产品和服务。以下是 Astra Trident 的一些最新功能。有关早期版本，请参阅早期版本的文档。</block>
+  <block id="23dc68eb3282da7f8baebc1f7c84fff9" category="inline-link">支持生命周期页面</block>
+  <block id="df26dce8cff00211af89034cce0d1904" category="admonition">有关最新 Trident 版本支持计划，请参阅<block ref="605c91b6d04b068d1f5e6199e80f3518" category="inline-link-rx"></block>。</block>
 </blocks>
