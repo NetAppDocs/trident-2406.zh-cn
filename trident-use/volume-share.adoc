@@ -141,7 +141,7 @@ Asta Trident读取 `shareFromPVC`目标PVC上的标注、并将目标PV创建为
 
 ==  `tridentctl get`用于查询子卷
 
-您可以使用[`tridentctl`实用程序运行 `get`命令以获取子卷。有关详细信息、请参阅链接：Trident tridentctl.html[`tridentctl` commands and options ]。
+使用该[`tridentctl`实用程序，您可以运行该 `get`命令来获取从属卷。有关详细信息，请参阅链接：../trident-managing-k8s/tridentctl.html[`tridentctl`命令和选项]。
 
 [listing]
 ----
@@ -170,6 +170,5 @@ flags
 
 要了解有关跨命名空间卷访问的详细信息、请执行以下操作：
 
-* 请访问。link:https://cloud.netapp.com/blog/astra-blg-sharing-volumes-between-namespaces-say-hello-to-cross-namespace-volume-access["在命名空间之间共享卷：对跨命名空间卷访问说Hello"^]
 * 观看上的演示 link:https://media.netapp.com/page/9071d19d-1438-5ed3-a7aa-ea4d73c28b7f/solutions-products["NetAppTV"^]。
 

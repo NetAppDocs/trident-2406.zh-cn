@@ -74,7 +74,7 @@ NOTE: 在OpenShift容器平台上使用TRIDent操作程序进行升级时、应�
 
 == 第3步：选择升级方法
 
-通常，您应该使用与初始安装相同的方法进行升级，但您可以这样做link:../trident-get-started/kubernetes-deploy.html#moving-between-installation-methods["在安装方法之间切换"]。升级Astra Trident有两种选择。
+一般来说，您应该使用与初始安装相同的方法进行升级，但您可以link:../trident-install/kubernetes-deploy.html#moving-between-installation-methods["在安装方法之间切换"]。升级 Astra Trident 有两种选择。
 
 * link:upgrade-operator.html["使用Trident操作符进行升级"]
 +

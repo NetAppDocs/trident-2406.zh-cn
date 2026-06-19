@@ -18,7 +18,7 @@ summary: '您可以使用轻松升级现有的Astra Trident安装 `tridentctl`�
 卸载并重新安装 Astra Trident 可作为升级。卸载 Trident 时，不会删除 Astra Trident 部署所使用的永久性卷声明（ PVC ）和永久性卷（ PV ）。在 Astra Trident 脱机期间，已配置的 PV 仍可用，而 Astra Trident 将在恢复联机后为在此期间创建的任何 PVC 配置卷。
 
 .开始之前
-使用升级前请 `tridentctl`查看link:upgrade-trident.html#select-an-upgrade-method["选择升级方法"]。
+在使用 `tridentctl`进行升级之前，请先link:upgrade-trident.html#step-3-select-an-upgrade-method["选择升级方法"]审核。
 
 .步骤
 . 在中运行卸载命令 `tridentctl`以删除与Astra Trident关联的所有资源、但CRD和相关对象除外。
@@ -27,7 +27,7 @@ summary: '您可以使用轻松升级现有的Astra Trident安装 `tridentctl`�
 ----
 ./tridentctl uninstall -n <namespace>
 ----
-. 重新安装Asta Trdent。请参阅 link:../trident-get-started/kubernetes-deploy-tridentctl.html["使用 tridentctl 安装 Astra Trident"]。
+. 重新安装 Astra Trident。请参见 link:../trident-install/kubernetes-deploy-tridentctl.html["使用 tridentctl 安装 Astra Trident"]。
 
 
 

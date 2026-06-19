@@ -18,7 +18,7 @@ summary: 在使用三端修复操作符升级Asta三端修复程序之前、您�
 
 == TRIdent操作员升级处理
 
-需要安装和升级Astra Trident的众多方法之一link:../trident-get-started/kubernetes-deploy.html["使用啮合式操作员的优势"]是、在不中断现有已挂载卷的情况下自动处理Astra Trident和Kubnetes对象。通过这种方式，Astra Trident可以支持零停机升级，或link:https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/["_滚动更新_"^]。尤其是、通过与Kubenetes集群进行通信、可以：
+安装和升级 Astra Trident 的众多link:../trident-get-install/kubernetes-deploy.html["使用啮合式操作员的优势"]之一是自动处理 Astra Trident 和 Kubernetes 对象，而不会中断现有的已挂载卷。通过这种方式，Astra Trident 可以支持零停机时间的升级，或link:https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/["_滚动更新_"^]。特别是，Trident 操作符与 Kubernetes 集群通信以：
 
 * 删除并重新创建三级控制器部署和节点DemonSet。
 * 使用新版本更换TRIDent控制器Pod和TRIDent节点Pod。
@@ -30,7 +30,7 @@ summary: 在使用三端修复操作符升级Asta三端修复程序之前、您�
 
 
 
-TIP: 有关Kubnetes集群上Astra Trident架构的详细信息，请参阅link:trident-concepts/intro.html#astra-trident-architecture["Astra Trident架构"]。
+TIP: 有关 Kubernetes 集群上 Astra Trident 架构的更多信息，请参见 link:../trident-get-started/intro.html#astra-trident-architecture["Astra Trident架构"]。
 
 
 

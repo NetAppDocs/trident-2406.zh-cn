@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar 
-permalink: trident-get-started/kubernetes-deploy-helm.html 
+permalink: trident-install/kubernetes-deploy-helm.html 
 keywords: deploy, astra trident, operator, helm, helm chart, configuration, values, standard, registry 
 summary: 您可以使用Helm部署Trident操作员并安装Astra Trident。此过程将处理适用场景 安装、其中、Astra Trident所需的容器映像不会存储在专用注册表中。 
 ---
@@ -37,10 +37,10 @@ summary: 您可以使用Helm部署Trident操作员并安装Astra Trident。此�
 
 使用Trident、link:https://artifacthub.io/packages/helm/netapp-trident/trident-operator["Helm图表"^]您可以一步部署Trident操作员并安装Trident。
 
-查看link:../trident-get-started/kubernetes-deploy.html["安装概述"]以确保满足安装前提条件、并为您的环境选择了正确的安装选项。
+请检查 link:../trident-install/kubernetes-deploy.html["安装概述"] 以确保您已满足安装先决条件，并为您的环境选择了正确的安装选项。
 
 .开始之前
-除了您需要的外link:../trident-get-started/kubernetes-deploy.html#before-you-deploy["部署前提条件"]link:https://v3.helm.sh/["Helm 版本 3"^]。
+除了 link:../trident-install/kubernetes-deploy.html#before-you-deploy["部署前提条件"] 之外，您还需要 link:https://v3.helm.sh/["Helm 版本 3"^]。
 
 .步骤
 . 添加Astra Trident Helm存储库：

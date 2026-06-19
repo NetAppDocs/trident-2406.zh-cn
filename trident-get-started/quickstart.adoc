@@ -22,7 +22,7 @@ NOTE: 对于Docker，请参见link:../trident-docker/deploy-docker.html["适用�
 Asta三端设计提供了多种针对各种环境和组织进行了优化的安装方法和模式。
 
 [role="quick-margin-para"]
-link:../trident-get-started/kubernetes-deploy.html["安装 Astra Trident"]
+link:../trident-install/kubernetes-deploy.html["安装 Astra Trident"]
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png["两个"]准备工作节点
 [role="quick-margin-para"]

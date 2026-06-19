@@ -84,8 +84,7 @@ Astra上有一个由容器用户(包括Astra Trident开发人员)组成的活跃
 
 == 了解更多信息
 
-* link:https://cloud.netapp.com/blog/topic/astra["Astra 博客"^]
 * link:https://netapp.io/persistent-storage-provisioner-for-kubernetes/["Astra Trident 博客"^]
-* link:https://cloud.netapp.com/kubernetes-hub["Kubernetes Hub"^]
+* link:https://www.netapp.com/console/["Kubernetes Hub"^]
 * link:https://netapp.io/["netapp.io"^]
 

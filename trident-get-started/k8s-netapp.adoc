@@ -33,7 +33,7 @@ NOTE: Trident 支持上述所有 ONTAP 部署模式。
 
 == Cloud Volumes ONTAP
 
-http://cloud.netapp.com/ontap-cloud?utm_source=GitHub&utm_campaign=Trident["Cloud Volumes ONTAP"^]是一款纯软件存储设备、可在云中运行ONTAP数据管理软件。您可以将 Cloud Volumes ONTAP 用于生产工作负载、灾难恢复、 DevOps 、文件共享和数据库管理。它通过提供存储效率，高可用性，数据复制，数据分层和应用程序一致性，将企业级存储扩展到云。
+Cloud Volumes ONTAP是一款纯软件存储设备，可在云中运行ONTAP数据管理软件。您可以将Cloud Volumes ONTAP用于生产工作负载、灾难恢复、DevOps、文件共享和数据库管理。它通过提供存储效率、高可用性、数据复制、数据分层和应用程序一致性，将企业存储扩展到云端。
 
 
 
@@ -59,10 +59,10 @@ Trident 完全支持 NetApp HCI 。Trident 可以直接在底层 NetApp HCI 存�
 
 == Azure NetApp Files
 
-https://azure.microsoft.com/en-us/services/netapp/["Azure NetApp Files"^]是由NetApp提供支持的企业级Azure文件共享服务。您可以在 Azure 中以本机方式运行要求最苛刻的基于文件的工作负载，同时享受 NetApp 应有的性能和丰富的数据管理功能。
+https://azure.microsoft.com/en-us/products/netapp/["Azure NetApp Files"^] 是企业级 Azure 文件共享服务，由 NetApp 提供支持。您可以在 Azure 中以本机方式运行要求最苛刻的基于文件的工作负载，并提供您期望从 NetApp 获得的性能和丰富的数据管理。
 
 
 
 == 适用于 Google Cloud 的 Cloud Volumes Service
 
-https://cloud.netapp.com/cloud-volumes-service-for-gcp?utm_source=GitHub&utm_campaign=Trident["适用于 Google Cloud 的 NetApp Cloud Volumes Service"^]是一种云原生文件服务、可通过NFS和SMB为NAS卷提供全闪存性能。此服务支持在GCP云中运行任何工作负载、包括传统应用程序。它提供了一种完全托管的服务，可提供稳定一致的高性能，即时克隆，数据保护以及对 Google Compute Engine （ GCE ）实例的安全访问。
+link: https://www.netapp.com/google-cloud/netapp-volumes/[NetApp Cloud Volumes Service for Google Cloud^] 是一种云原生文件服务，可通过 NFS 和 SMB 提供 NAS 卷，并提供全闪存性能。此服务可让任何工作负载（包括旧版应用程序）在 GCP 云中运行。它提供完全托管的服务，具备一致的高性能、即时克隆、数据保护以及对 Google Compute Engine (GCE) 实例的安全访问。
