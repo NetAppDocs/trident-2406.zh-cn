@@ -19,7 +19,7 @@ Trident 23.10及更高版本提供了使用Astra Control配置程序的选项、
 在即将推出的Astra Control更新中、Astra Control配置程序将取代Astra Trandent作为存储配置程序和流程编排程序、并且Astra Control必须使用它。因此、强烈建议Asta Control用户启用Asta Control配置程序。Asta三元数据将继续保持开源状态、并使用NetApp的新CSI和其他功能进行发布、维护、支持和更新。
 
 .如何知道是否需要启用Astra Control配置程序？
-如果您向Astra Control Service中添加的集群之前未安装Astra三端磁盘，则该集群将标记为 `Eligible`。之后 link:../get-started/add-first-cluster.html["将集群添加到Asta Control"]，A作用 力控制配置程序将自动启用。
+如果将之前未安装 Astra Trident 的集群添加到 Astra Control Service，此集群将被标记为 `Eligible`。将此集群添加到 Astra Control 后，将自动启用 Astra Control Provisioner。
 
 如果未标记集群，则会因为以下原因之一而标记该集群 `Eligible` `Partially eligible` ：
 
@@ -63,7 +63,7 @@ crane auth login cr.astra.netapp.io -u <account-id> -p <api-token>
 ----
 
 
-. (仅限自定义注册表)按照以下步骤将图像移动到自定义注册表。如果您不使用注册表，请按照中的“三端”运算符步骤操作 <<no-registry,下一节>>。
+. （仅限自定义注册表）按照以下步骤将映像移动到自定义注册表。如果您不使用注册表，请按照 <<first-step,下一节>> 中的 Trident 操作员步骤操作。
 +
 
 NOTE: 以下命令可以使用Podman、而不是Docker。如果您使用的是Windows环境、建议使用PowerShell。
@@ -119,13 +119,13 @@ crane copy cr.astra.netapp.io/astra/trident-acp:24.02.0 <my_custom_registry>/tri
 --
 ====
 . 确定原来的Asta三端安装方法是否使用了。
-. 使用您最初使用的安装方法在Asta Trdent中启用Asta Control配置程序：
+. [[first-step]]使用您最初使用的安装方法在 Astra Trident 中启用 Astra Control Provisioner：
 +
 [role="tabbed-block"]
 ====
 .Asta三端操作员
 --
-.. https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy-operator.html#step-1-download-the-trident-installer-package["下载Asta三端安装程序并解压缩"^](英文)
+.. https://docs.netapp.com/us-en/trident/trident-install/kubernetes-deploy-operator.html#step-1-download-the-trident-installer-package["下载Asta三端安装程序并解压缩"^]。
 .. 如果您尚未安装Astra三端安装程序、或者您从初始Astra三端安装程序中删除了操作员、请完成以下步骤：
 +
 ... 创建客户需求日：
@@ -235,7 +235,7 @@ status:
 --
 .Tridentctl
 --
-.. https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy-tridentctl.html#step-1-download-the-trident-installer-package["下载Asta三端安装程序并解压缩"^](英文)
+.. https://docs.netapp.com/us-en/trident/trident-install/kubernetes-deploy-tridentctl.html#step-1-download-the-trident-installer-package["下载Asta三端安装程序并解压缩"^]。
 .. https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-tridentctl.html["如果您已有Asta Trident、请从托管它的集群中将其卸载"^](英文)
 .. 在启用Asta Control配置程序的情况下安装Asta Trent (`--enable-acp=true`)：
 +

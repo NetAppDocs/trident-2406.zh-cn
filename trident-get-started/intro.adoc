@@ -16,6 +16,7 @@ Asta Trident是一个完全受支持的开放源代码项目，由NetApp作为�
 
 
 
+[[what-is-astra]]
 == 什么是 Astra ？
 
 借助 Astra ，企业可以更轻松地在公有云内部和内部环境中管理，保护和移动 Kubernetes 上运行的数据丰富的容器化工作负载。
@@ -26,6 +27,7 @@ Asta配置并提供基于Asta Trandent构建的永久性容器存储。此外、
 
 
 
+[[what-is-astra-trident]]
 == 什么是Astra Trdent？
 
 Asta Trident支持在公有云或内部环境中的所有常见NetApp存储平台上使用和管理存储资源、包括ONTAP (AFF、FAS、Select、云、 Amazon FSx for NetApp ONTAP)、Element软件(NetApp HCI、SolidFire)、Azure NetApp Files服务以及Google Cloud上的Cloud Volumes Service。
@@ -39,9 +41,10 @@ NOTE: 如果这是您首次使用Kubarnetes，您应熟悉link:https://kubernete
 
 
 
+[[take-the-astra-trident-test-drive]]
 == 试用Asta Trident
 
-要进行试用、请使用随时可用的实验室映像申请访问"轻松部署和克隆容器化工作负载的永久性存储"link:https://www.netapp.com/us/try-and-buy/test-drive/index.aspx["NetApp 试用"^]。此试用版提供了一个沙盒环境、其中安装并配置了三节点Kubbernetes集群和Asta Trident。这是熟悉Astra Trandent并了解其功能的绝佳方式。
+要进行试驾，请使用现成的实验室映像请求访问"轻松部署和克隆容器化工作负载的永久存储"link:https://www.netapp.com/test-drives/["NetApp 试用"^]。测试驱动提供了一个安装并配置了三节点 Kubernetes 集群和 Astra Trident 的沙盒环境。这是熟悉 Astra Trident 并探索其功能的好方法。
 
 另一个选项是Kubbernetes提供的link:https://kubernetes.io/docs/setup/independent/install-kubeadm/["《 kubeadm 安装指南》"]。
 
@@ -50,6 +53,7 @@ NOTE: 请勿在生产环境中使用按照以下说明构建的Kubennet集群。
 
 
 
+[[kubernetes-integration-with-netapp-products]]
 == Kubnetes与NetApp产品的集成
 
 NetApp存储产品组合可与Kubbernetes集群的许多方面集成、从而提供高级数据管理功能、从而增强Kubbernetes部署的功能、性能和可用性。
@@ -102,6 +106,7 @@ ONTAP 系统采用全闪存，混合或全 HDD 配置，并提供多种不同的
 ====
 
 
+[[for-more-information]]
 == 了解更多信息
 
 * https://docs.netapp.com/us-en/astra-family/intro-family.html["NetApp Astra 产品系列"^]

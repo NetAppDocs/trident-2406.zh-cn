@@ -16,6 +16,7 @@ summary: 了解如何使用ONTAP NAS驱动程序配置ONTAP后端。
 
 
 
+[[ontap-nas-driver-details]]
 == ONTAP NAS驱动程序详细信息
 
 Asta三端存储提供了以下NAS存储驱动程序、用于与ONTAP集群进行通信。支持的访问模式包括：_ReadWriteOnce_(RWO)、_ReadOnlyMany_(ROX)、_ReadWriteMany_(rwx)、_ReadWriteOncePod_(RWOP)。
@@ -62,6 +63,7 @@ Rwo、ROX、rwx、RWOP
 |===
 
 
+[[astra-control-driver-compatibility]]
 === Astra Control驱动程序兼容性
 
 Asta Control可为使用、 `ontap-nas-flexgroup`和 `ontap-san`驱动程序创建的卷提供无缝保护、灾难恢复和移动性(在Kubnetes集群之间移动卷) `ontap-nas`。有关详细信息、请参见 link:https://docs.netapp.com/us-en/astra-control-center/use/replicate_snapmirror.html#replication-prerequisites["Astra Control复制前提条件"^] 。
@@ -76,6 +78,7 @@ Asta Control可为使用、 `ontap-nas-flexgroup`和 `ontap-san`驱动程序创�
 ====
 
 
+[[user-permissions]]
 == 用户权限
 
 Astra Trident应以ONTAP或SVM管理员身份运行、通常使用集群用户 `vsadmin`或SVM用户、或者使用 `admin`具有相同角色的其他名称的用户。

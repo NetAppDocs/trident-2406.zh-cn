@@ -26,6 +26,7 @@ If you want to make use of the snapshot functionality, install the CSI snapshot 
 ----
 
 
+[[install-astra-trident-via-helm]]
 == 通过Helm安装Asta Trident
 
 . 下载Asta Trident安装程序包
@@ -67,12 +68,14 @@ trident-operator    trident     1           2024-10-14 14:31:22.463122 +0300 IDT
 
 
 
+[[install-astra-trident-via-the-eks-add-on]]
 == 通过EKS插件安装Astra Trident
 
 A作用 是通过AWS验证、可与Amazon EKS配合使用。通过EKS加载项、您可以始终确保Amazon EKS集群安全稳定、并减少安装、配置和更新加载项所需的工作量。
 
 
 
+[[prerequisites]]
 === 前提条件
 
 在配置适用于AWS EKS的Asta TrIDent加载项之前、请确保满足以下条件：
@@ -89,6 +92,7 @@ A作用 是通过AWS验证、可与Amazon EKS配合使用。通过EKS加载项�
 
 
 
+[[enable-the-astra-trident-add-on-for-aws]]
 === 启用适用于AWS的Asta Trident加载项
 
 [role="tabbed-block"]
@@ -166,6 +170,7 @@ NOTE: 在配置可选参数 `cloudIdentity`时，请确保在使用EKS加载项�
 ====
 
 
+[[update-the-astra-trident-eks-add-on]]
 === 更新Astra Trident EKS加载项
 
 [role="tabbed-block"]
@@ -220,6 +225,7 @@ netapp_trident-operator    v24.6.1-eksbuild.1    ACTIVE    0       {"cloudIdenti
 ====
 
 
+[[uninstallremove-the-astra-trident-eks-add-on]]
 === 卸载/删除Asta Trident EKS加载项
 
 您可以通过两种方式删除Amazon EKS附加项：

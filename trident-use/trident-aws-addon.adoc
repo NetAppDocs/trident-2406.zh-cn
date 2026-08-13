@@ -16,6 +16,7 @@ Asta三端存储简化了Kubelnetes中适用于NetApp ONTAP存储的Amazon FSx�
 
 
 
+[[prerequisites]]
 == 前提条件
 
 在配置适用于AWS EKS的Asta TrIDent加载项之前、请确保满足以下条件：
@@ -32,6 +33,7 @@ Asta三端存储简化了Kubelnetes中适用于NetApp ONTAP存储的Amazon FSx�
 
 
 
+[[steps]]
 == 步骤
 
 . 在EKS Kubernetes集群上、导航到*附加项*选项卡。
@@ -71,6 +73,7 @@ image::../media/aws-eks-05.png[AWS EKS 05]
 
 
 
+[[installuninstall-the-astra-trident-eks-add-on-using-cli]]
 == 使用命令行界面安装/卸载A作用 的三端EKS加载项
 
 .使用命令行界面安装Asta Trident EKS加载项：

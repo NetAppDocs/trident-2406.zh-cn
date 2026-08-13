@@ -13,6 +13,7 @@ summary: '通过将Asta三端存储与Amazon FSx for NetApp ONTAP 结合使用�
 
 
 
+[[ontap-san-and-nas-driver-integration]]
 == ONTAP SAN和NAS驱动程序集成
 
 您可以使用存储在AWS机密管理器中的SVM凭据(用户名和密码)创建后端文件、如以下示例所示：
@@ -76,6 +77,7 @@ spec:
 
 
 
+[[fsx-for-ontap-driver-details]]
 == FSx for ONTAP驱动程序详细信息
 
 您可以使用以下驱动程序将Astra Trident与适用于NetApp ONTAP 的Amazon FSx集成：
@@ -91,6 +93,7 @@ spec:
 
 
 
+[[example-configurations]]
 == 示例配置
 
 .使用密钥管理器配置AWS FSx for ONTAP
@@ -136,6 +139,7 @@ parameters:
 ====
 
 
+[[backend-advanced-configuration-and-examples]]
 == 后端高级配置和示例
 
 有关后端配置选项，请参见下表：
@@ -229,6 +233,7 @@ parameters:
 |===
 
 
+[[backend-configuration-options-for-provisioning-volumes]]
 == 用于配置卷的后端配置选项
 
 您可以在配置部分使用这些选项控制默认配置 `defaults`。有关示例，请参见以下配置示例。
@@ -262,7 +267,7 @@ parameters:
 | `encryption` | 在新卷上启用NetApp卷加密(NVE)；默认为 `false`。要使用此选项，必须在集群上获得 NVE 的许可并启用 NVE 。如果在后端启用了NAE、则在Astra Trident中配置的任何卷都将启用NAE。有关详细信息，请参阅：link:../trident-reco/security-reco.html["Astra Trident如何与NVE和NAE配合使用"]。 | `false` 
 
 
-| `luksEncryption` | 启用LUKS加密。请参阅 link:../trident-reco/security-reco.html#Use-Linux-Unified-Key-Setup-(LUKS)["使用Linux统一密钥设置(LUKS)"]。仅SAN。 | "" 
+| `luksEncryption` | 启用 LUKS 加密。请参阅 link:../trident-reco/security-luks.html["使用Linux统一密钥设置(LUKS)"]。仅限 SAN。 | "" 
 
 
 | `tieringPolicy` | 要使用的层策略	`none` | `snapshot-only`对于ONTAP 9 5之前的SVM-DR配置 
@@ -275,6 +280,7 @@ parameters:
 |===
 
 
+[[prepare-to-provision-smb-volumes]]
 == 准备配置SMB卷
 
 您可以使用驱动程序配置SMB卷 `ontap-nas`。完成以下步骤之前。<<ONTAP SAN和NAS驱动程序集成>>

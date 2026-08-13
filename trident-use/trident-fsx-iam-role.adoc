@@ -19,6 +19,7 @@ NOTE: 要使用AWS IAM角色进行身份验证、您必须使用EKS部署Kubenet
 
 
 
+[[create-aws-secret-manager-secret]]
 == 创建AWS机密管理器密钥
 
 以下示例将创建一个AWS机密管理器密钥、用于存储ASRA Trident CSI凭据：
@@ -27,6 +28,7 @@ NOTE: 要使用AWS IAM角色进行身份验证、您必须使用EKS部署Kubenet
 
 
 
+[[create-iam-policy]]
 == 创建IAM策略
 
 以下示例将使用AWS命令行界面创建IAM策略：
@@ -66,6 +68,7 @@ policy.json:
 ----
 
 
+[[create-and-iam-role-for-the-service-account]]
 == 服务帐户的创建和IAM角色
 
 以下示例将在EKS中为服务帐户创建IAM角色：

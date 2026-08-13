@@ -16,6 +16,7 @@ Trident运算符允许您使用规范中的属性自定义Astra Trident安装 `T
 
 
 
+[[understanding-controller-pods-and-node-pods]]
 == 了解控制器Pod和节点Pod
 
 Astra Trident作为一个控制器POD运行、并在集群中的每个工作节点上运行一个节点POD。节点POD必须在任何可能要挂载Astra Trident卷的主机上运行。
@@ -28,6 +29,7 @@ Kuborneteslink:https://kubernetes.io/docs/concepts/scheduling-eviction/assign-po
 
 
 
+[[configuration-options]]
 == 配置选项
 
 
@@ -117,6 +119,7 @@ NOTE: 有关格式化POD参数的详细信息，请参阅link:https://kubernetes
 
 
 
+[[details-about-force-detach]]
 === 有关强制断开的详细信息
 
 强制分离仅适用于 `ontap-san`和 `ontap-san-economy`。在启用强制断开之前、必须在Kubbernetes集群上启用非正常节点关闭(NGN)。有关详细信息，请参阅 link:https://kubernetes.io/docs/concepts/architecture/nodes/#non-graceful-node-shutdown["Kubnetes：节点非正常关闭"^]。
@@ -142,6 +145,7 @@ NOTE: Trident控制器将拒绝新的发布卷请求，直到节点被Trident节
 
 
 
+[[sample-configurations]]
 == 配置示例
 
 定义时、您可以使用中的属性<<配置选项>>来自定义 `TridentOrchestrator`安装。

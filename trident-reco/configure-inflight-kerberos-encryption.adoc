@@ -20,6 +20,7 @@ Asta Control配置程序支持通过从Red Hat OpenShift和上游Kubbernetes集�
 
 
 
+[[configure-in-flight-kerberos-encryption-with-on-premises-ontap-volumes]]
 == 为内部ONTAP卷配置传输中的Kerberos加密
 
 您可以对受管集群与内部ONTAP存储后端之间的存储流量启用Kerberos加密。
@@ -38,6 +39,7 @@ NOTE: 仅支持使用存储驱动程序对内部ONTAP存储后端的NFS流量进
 
 
 
+[[add-or-modify-ontap-export-policies]]
 === 添加或修改ONTAP导出策略
 
 您需要向现有ONTAP导出策略添加规则、或者创建新的导出策略、以便对ONTAP Storage VM根卷以及与上游Kubornetes集群共享的任何ONTAP卷支持Kerberos加密。您添加的导出策略规则或创建的新导出策略需要支持以下访问协议和访问权限：
@@ -76,6 +78,7 @@ NOTE: 仅支持使用存储驱动程序对内部ONTAP存储后端的NFS流量进
 
 
 
+[[create-a-storage-backend]]
 === 创建存储后端
 
 您可以创建包含Kerberos加密功能的A作用 力控制配置程序存储后端配置。
@@ -143,6 +146,7 @@ tridentctl logs
 
 
 
+[[create-a-storage-class]]
 === 创建存储类。
 
 您可以创建存储类来配置采用Kerberos加密的卷。
@@ -199,18 +203,20 @@ ontap-nas-sc    csi.trident.netapp.io   15h
 
 
 
+[[provision-volumes]]
 === 配置卷
 
 创建存储后端和存储类后、您现在可以配置卷。请参阅这些说明 https://docs.netapp.com/us-en/trident/trident-use/vol-provision.html["配置卷"^]。
 
 
 
+[[configure-in-flight-kerberos-encryption-with-azure-netapp-files-volumes]]
 == 为Azure NetApp Files卷配置传输中的Kerberos加密
 
 您可以对受管集群与单个Azure NetApp Files存储后端或Azure NetApp Files存储后端虚拟池之间的存储流量启用Kerberos加密。
 
 .开始之前
-* 确保已在受管Red Hat OpenShift集群上启用Asta Control配置程序。有关说明、请参见 link:../use/enable-acp.html["启用Asta Control配置程序"^] 。
+* 确保已在托管的 Red Hat OpenShift 集群上启用 Astra Control Provisioner。有关说明，请参阅 link:../trident-use/enable-acp.html["启用Asta Control配置程序"^]。
 * 确保您可以访问该 `tridentctl` 实用程序。
 * 请注意要求并按照中的说明，确保已为Kerberos加密准备好Azure NetApp Files存储后端 https://learn.microsoft.com/en-us/azure/azure-netapp-files/configure-kerberos-encryption["Azure NetApp Files 文档"^]。
 * 确保已正确配置使用Kerberos加密的任何NFSv4卷。请参阅的“NetApp NFSv4域配置”一节(第13页) https://www.netapp.com/media/16398-tr-3580.pdf["《NetApp NFSv4增强功能和最佳实践指南》"^]。
@@ -218,6 +224,7 @@ ontap-nas-sc    csi.trident.netapp.io   15h
 
 
 
+[[create-a-storage-backend]]
 === 创建存储后端
 
 您可以创建包含Kerberos加密功能的Azure NetApp Files存储后端配置。
@@ -340,6 +347,7 @@ tridentctl logs
 
 
 
+[[create-a-storage-class]]
 === 创建存储类。
 
 您可以创建存储类来配置采用Kerberos加密的卷。
@@ -384,6 +392,7 @@ sc-nfs    csi.trident.netapp.io   15h
 
 
 
+[[provision-volumes]]
 === 配置卷
 
 创建存储后端和存储类后、您现在可以配置卷。请参阅这些说明 https://docs.netapp.com/us-en/trident/trident-use/vol-provision.html["配置卷"^]。

@@ -16,12 +16,14 @@ summary: 了解Asta三元数据以及使用Asta三元数据创建的卷的保护
 
 
 
+[[astra-trident-replication-and-recovery]]
 == Astra三元数据复制和恢复
 
 您可以创建备份、以便在发生灾难时还原Asta三端存储。
 
 
 
+[[astra-trident-replication]]
 === Astra三项技术复制
 
 Astra Tandent使用Kubnetes CRD存储和管理自己的状态、并使用Kubnetes集群etcd存储其元数据。
@@ -37,6 +39,7 @@ NOTE: 建议您保护FlexVol所在的SVM、并将其与另一个SVM建立SnapMir
 
 
 
+[[astra-trident-recovery]]
 === Asta三元组恢复
 
 您可以使用Kubenetes CRD和Kubenetes集群etcd快照来恢复Astra Trident。
@@ -50,6 +53,7 @@ NOTE: 建议您保护FlexVol所在的SVM、并将其与另一个SVM建立SnapMir
 
 
 
+[[svm-replication-and-recovery]]
 == SVM复制和恢复
 
 Asta Trident无法配置复制关系、但存储管理员可以使用 https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-svm-replication-concept.html["ONTAP SnapMirror"^]来复制SVM。
@@ -66,6 +70,7 @@ Asta Trident无法配置复制关系、但存储管理员可以使用 https://do
 
 
 
+[[svm-replication]]
 === SVM复制
 
 您可以使用link:https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-svm-replication-workflow-concept.html["ONTAP：SnapMirror SVM复制"^]创建SVM复制关系。
@@ -79,6 +84,7 @@ Asta Trident无法配置复制关系、但存储管理员可以使用 https://do
 
 
 
+[[svm-recovery-using-astra-trident]]
 === 使用Asta Trdent恢复SVM
 
 Astra Trident 不会自动检测 SVM 故障。如果发生灾难、管理员可以手动启动通过三项功能故障转移到新SVM的操作。
@@ -102,6 +108,7 @@ NOTE: 如果指定了 `-identity-preserve true`，则激活目标SVM后，Asta T
 
 
 
+[[volume-replication-and-recovery]]
 == 卷复制和恢复
 
 Asta Trident无法配置SnapMirror复制关系、但是存储管理员可以使用link:https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-disaster-recovery-concept.html["ONTAP SnapMirror复制和恢复"^]来复制Asta Trident创建的卷。
@@ -113,6 +120,7 @@ NOTE:  `ontap-san-economy`或 `ontap-flexgroup-economy`驱动程序不支持导�
 
 
 
+[[snapshot-data-protection]]
 == Snapshot数据保护
 
 您可以使用以下方式保护和还原数据：
@@ -129,6 +137,7 @@ link:https://docs.netapp.com/us-en/ontap/data-protection/manage-local-snapshot-c
 
 
 
+[[astra-control-center-application-replication]]
 == Astra Control Center应用程序复制
 
 使用Astra Control、您可以使用SnapMirror的异步复制功能将数据和应用程序更改从一个集群复制到另一个集群。

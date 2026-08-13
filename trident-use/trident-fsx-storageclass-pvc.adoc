@@ -16,10 +16,12 @@ summary: '通过将Asta三端存储与Amazon FSx for NetApp ONTAP 结合使用�
 
 
 
+[[create-a-storage-class]]
 == 创建存储类。
 
 
 
+[[configure-a-kubernetes-storageclass-object]]
 === 配置Kubnetes StorageClass对象
 
  https://kubernetes.io/docs/concepts/storage/storage-classes/["Kubnetes StorageClass对象"^]将Astra Trident标识为用于该类的配置程序、指示Astra Trident如何配置卷。例如：
@@ -41,6 +43,7 @@ parameters:
 
 
 
+[[create-a-storage-class]]
 === 创建存储类。
 
 .步骤
@@ -63,6 +66,7 @@ basic-csi    csi.trident.netapp.io   15h
 
 
 
+[[create-the-pv-and-pvc]]
 == 创建PV和PVC
 
 A link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/["_PersigentVolume_"^] (PV)是由集群管理员在Kubbernetes集群上配置的物理存储资源。 https://kubernetes.io/docs/concepts/storage/persistent-volumes["_PersigentVolumeClaim_"^](PVC)是指请求访问集群上的永久卷。
@@ -73,6 +77,7 @@ A link:https://kubernetes.io/docs/concepts/storage/persistent-volumes/["_Persige
 
 
 
+[[sample-manifests]]
 === 示例清单
 
 .PerfsentVolume示例清单
@@ -141,6 +146,7 @@ storageClassName: protection-gold
 ====
 
 
+[[create-the-pv-and-pvc]]
 === 创建PV和PVC
 
 .步骤
@@ -178,6 +184,7 @@ pvc-storage Bound  pv-name 2Gi      RWO                       5m
 
 
 
+[[astra-trident-attributes]]
 == Asta Trident属性
 
 这些参数用于确定应使用哪些A作用 于Astra三端存储池来配置给定类型的卷。
